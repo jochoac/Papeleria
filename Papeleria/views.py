@@ -1,5 +1,3 @@
-from django import http
-from django.http import HttpResponse
 from Datos.models import Empleado, Producto, Proveedor
 from django.shortcuts import render
 
@@ -18,12 +16,6 @@ def consultas(request):
 
 def gesnom(request):
     return render(request, 'Gesnom.html')
-
-def nomina(request):
-    return render(request, 'Nomina.html')
-
-def proveedores(request):
-    return render(request, 'Proveedores.html')
 
 def recibped(request):
     return render(request,'RecibPed.html')
@@ -71,16 +63,6 @@ def actempl(request,codigo):
     empleado = Empleado.objects.get(DNI=codigo)
     return render(request, 'Actempl.html', {'empleado': empleado})
 
-def uptemple (request, codigo):
-    emp = Empleado.objects.get(DNI=codigo)
-    emp.Nombre = request.POST['nombre']
-    emp.Apellido = request.POST['apellido']
-    emp.Cargo = request.POST['cargo']
-    emp.Estado = request.POST['estado']
-    emp.save()
-    empleados = Empleado.objects.all()
-    return render(request, 'Regnom.html', {'empleados': empleados})
-
 def regprov(request):
 
     if request.method == 'POST':
@@ -103,3 +85,9 @@ def actualizarP(request, codigo):
     pro.save()
     productos = Producto.objects.all()
     return render(request, 'Regispro.html', {'productos': productos})
+
+def actprov (request, codigo):
+    proveedor = Proveedor.objects.get(NIT=codigo)
+    print(proveedor.Nombre)
+    return render(request, 'actprov.html', {'proveedor': proveedor })
+

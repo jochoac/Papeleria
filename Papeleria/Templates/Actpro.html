@@ -15,13 +15,14 @@
     <div class="card col-md-6 col-sm-6 col-xs-10 items">
         <br>
         <form action="{% url 'actualizarP' producto.Codigo %}" method = "POST"> {% csrf_token %}
-            <input value = {{producto.Codigo}} name = "codigo" class="textbox" type="text"required placeholder="Codigo"> 
-            <input value = {{producto.Nombre}} name = "nombre" class="textbox" type="text" required placeholder="Nombre del Producto">
-            <input value = {{producto.Referencia}} name = "ref" class="textbox" type="text" required placeholder="Referencia">
-            <input value = {{producto.Existencia}} name = "cant" class="textbox" type="number" required placeholder="Cantidad">
-            <input value = {{producto.Categoria}} name = "cat" class="textbox" type="text" required placeholder="Categoría">
-            <input value = {{producto.Precio}} name = "price" class="textbox" type="number" required placeholder="Precio">
+            <input value = '{{producto.Codigo}}' name = "codigo" class="textbox" type="text"required placeholder="Codigo"> 
+            <input value = '{{producto.Nombre}}' name = "nombre" class="textbox" type="text" required placeholder="Nombre del Producto">
+            <input value = '{{producto.Referencia}}' name = "ref" class="textbox" type="text" required placeholder="Referencia">
+            <input value = '{{producto.Existencia}}' name = "cant" class="textbox" type="number" required placeholder="Cantidad">
+            <input value = '{{producto.Categoria}}' name = "cat" class="textbox" type="text" required placeholder="Categoría">
+            <input value = '{{producto.Precio}}' name = "price" class="textbox" type="number" required placeholder="Precio">
             <input name = "enviar" class="btn" type="submit" value="Actualizar">
         </form>      
     </div>
+</div>
 {% endblock %}
