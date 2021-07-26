@@ -1,0 +1,53 @@
+{% extends "Base.html"%}
+
+{% load static%}
+
+{% block title %}Registrar Empleados{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Regemple.css' %}">
+
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Empleados</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-4 col-sm-4 col-xs-10 items">
+        <form method="POST" action='/registrarnomina/'>
+            {% csrf_token %}
+            <br>
+            <input name= 'id' class="textbox" type="number"required placeholder="ID "> 
+            <input name= 'nombre' class="textbox" type="text" required placeholder="Nombre del Empleado">
+            <input name="apellido" class="textbox" type="text" required placeholder="Apellido del Empleado">
+            <input name="cargo" class="textbox" type="text" required placeholder="Cargo">
+            <input name='estado' class="textbox" type="text" required placeholder="Estado">
+            <input class="btn" type="submit" value="Registrar">
+        </form>
+        
+    </div>
+    <div id= "divtable" class="card col-md-6 col-sm-6 col-xs-10">
+        <table id="tableEmp">
+            <caption>Inventario</caption>
+            <tr>
+                <th data-numeric = "1" data-column= "0" data-order="desc">ID Empleado &#9660</th>
+                <th data-numeric = "0" data-column= "1" data-order="desc">Nombre &#9660</th>
+                <th data-numeric = "0" data-column= "2" data-order="desc">Apellido &#9660</th>
+                <th data-numeric = "0" data-column= "3" data-order="desc">Cargo &#9660</th>
+                <th data-numeric = "0" data-column= "4" data-order="desc">Estado &#9660</th>
+                <th>Editar</th>
+            </tr>
+            {% for empleado in empleados %}
+            <tr>
+                <td>{{empleado.DNI}}</td>
+                <td>{{empleado.Nombre}}</td>
+                <td>{{empleado.Apellido}}</td>
+                <td>{{empleado.Cargo}}</td>
+                <td>{{empleado.Estado}}</td>
+                <td class="editbtn"><a class="btn" href="{% url 'actempl' empleado.DNI %}">Editar</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <script src="{% static 'js/Sorting.js' %}"></script>
+    </div>
+</div>
+{% endblock %}
+            

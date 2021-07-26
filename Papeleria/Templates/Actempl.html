@@ -1,0 +1,28 @@
+{% extends "Base.html"%}
+
+{% load static%}
+
+{% block title %}Acualizar Empleado{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Regemple.css' %}">
+
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Actualizar Empleado</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-6 col-sm-6 col-xs-10 items">
+        <form method="POST" action='/registrarnomina/'>
+            {% csrf_token %}
+            <br>
+            <input value= "{{empleado.DNI}}" name= 'id' class="textbox" type="number"required placeholder="ID "> 
+            <input value= "{{empleado.Nombre}}"name= 'nombre' class="textbox" type="text" required placeholder="Nombre del Empleado">
+            <input value= "{{empleado.Apellido}}" name="apellido" class="textbox" type="text" required placeholder="Apellido del Empleado">
+            <input value= "{{empleado.Cargo}}" name="cargo" class="textbox" type="text" required placeholder="Cargo">
+            <input value= "{{empleado.Estado}}"name='estado' class="textbox" type="text" required placeholder="Estado">
+            <input class="btn" type="submit" value="Actualizar">
+        </form>
+        
+    </div>
+</div>
+{% endblock %}

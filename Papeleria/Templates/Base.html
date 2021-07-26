@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href='{% static "css/StylesProductos.css" %}'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="row main-container center-xs">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="body card animated flipInX">
+                <header >
+                    <nav class="Navegacion">
+                        <ul class="Menu">
+                            <li><a href="{% url 'productos' %}">Productos</a>
+                                <ul class="Submenu">
+                                    <li><a href="{% url 'regispro' %}">Registrar Productos</a>
+                                    </li>
+                                    <li><a href="{% url 'vender' %}">Vender</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'proveedores' %}">Proveedores</a>
+                                <ul class="Submenu">
+                                    <li><a href="{% url 'regprov' %}">Registrar Proveedores</a>
+                                    </li>
+                                    <li><a href="{% url 'recibped' %}">Recibir Pedido</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'nomina' %}">Nómina</a>
+                                <ul class="Submenu">
+                                    <li><a href="{% url 'regnom' %}">Registrar Empleados</a>
+                                    </li>
+                                    <li><a href="{% url 'gesnom' %}">Gestionar Nómina</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'consultas' %}">Consultas y Reportes</a></li>
+                            <li><a href="{% url 'login' %}">Cerrar sesión</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <div class="menu">
+                    <header style="text-align: center;">
+                        <h1 class="title" style="padding-top: 10px; color:#205459;">Papelería Comunicabañas</h1>
+                    </header>
+                </div>
+                <!-- Content -->
+                {% block content %} 
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>  
+</body>
+</html>

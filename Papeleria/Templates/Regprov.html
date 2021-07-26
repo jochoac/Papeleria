@@ -1,0 +1,52 @@
+{% extends "Base.html"%}
+
+{% load static%}
+
+{% block title %}Registrar Proveedores{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Regprov.css' %}">
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Proveedor</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-4 col-sm-4 col-xs-10 items">
+        <br>
+        <form action="/registrarproveedores/" method = "POST"> 
+            {% csrf_token %}
+            <input name= "nit" class="textbox" type="number"required placeholder="NIT"> 
+            <input name="nombre" class="textbox" type="text" required placeholder="Nombre del Proveedor">
+            <input name="tel" class="textbox" type="number" required placeholder="Telefono">
+            <input class="btn" type="submit" value="Registrar">
+        </form>
+    </div>
+    <div id = "divtable" class="card col-md-6 col-sm-6 col-xs-10  ">
+        <table id="tableProv">
+            <caption>Proveedores</caption>
+            <thead>
+                <tr>
+                    <th data-numeric = "0" data-column= "0" data-order="desc">NIT &#9660</th>
+                    <th data-numeric = "0" data-column= "1" data-order="desc">Nombre del Proveedor &#9660</th>
+                    <th data-numeric = "1" data-column= "2" data-order="desc">Telefono &#9660</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in proveedores %}
+                <tr>
+                    <td>{{ item.NIT }}</td>
+                    <td>{{ item.Nombre }}</td>
+                    <td>{{ item.Telefono }}</td>
+                    <td class="editbtn"><a class="btn" href="#">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+        <script src="{% static 'js/Sorting.js' %}"></script>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+
+<div class="productos">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-1">
+            <div class="card">
+                <img src='{% static "images/notebook.png" %}' alt="imagen de un cuaderno">
+                <h3>Cuadernos</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-2">
+            <div class="card">
+                <img src='{% static "images/folder.png" %}' alt="imagen de una carpeta">
+                <h3>Carpetas</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-3">
+            <div class="card">
+                <img src='{% static  "images/pencil.png" %}' alt="Imagen de un lapiz">
+                <h3>Lápices</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-4">
+            <div class="card">
+                <img src='{% static "images/Factu.png" %}' alt="Imagen de una factura">
+                <h3>Facturas</h3>
+            </div>
+        </div>  
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-5">
+            <div class="card">
+                <img src='{% static "images/Marcadorcito.png" %}' alt="Imagen de un marcador">
+                <h3>Marcadores</h3>
+            </div>   
+        </div> 
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-6">
+            <div class="card">
+                <img src='{% static  "images/Paper.png" %}' alt="Imagen de un papel">
+                <h3>Papel</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-7">
+            <div class="card">
+                <img src='{% static "images/Esfero.png" %}' alt="Imagen de un Esfero">
+                <h3>Esferos</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-8">
+            <div class="card">
+                <img src='{%  static "images/Colors.png"%}' alt="Imagen de unos colores">
+                <h3>Colores</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-9">
+            <div class="card">
+                <img src='{% static "images/Tijerayglue.png" %}' alt="Imagen de un pegante y unas tijeras">
+                <h3>Herramientas y Pegantes</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-10">
+            <div class="card">
+                <img src='{%  static "images/Rulers.png"%}' alt="Imagen de unas reglas">
+                <h3>Reglas y Escuadras</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-11">
+            <div class="card">
+                <img src='{%  static "images/others.png" %}' alt="Imagen de una estrella">
+                <h3>Otros Productos</h3>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-12">
+            <div class="card">
+                <img src='{%  static  "images/Todoslosprodcutos.png"%}' alt="Imagen de unas cajas">
+                <h3>Todos Los Productos</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

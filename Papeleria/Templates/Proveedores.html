@@ -1,0 +1,49 @@
+{% extends "Base.html"%}
+
+{% load static%}
+
+{% block title %}Proveedores{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/nominita.css' %}">
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Proveedores Registrados Actualmente</h2>
+</header>
+<div class="row center-xs">
+    <div class="card col-md-10 col-sm-6 col-xs-10  ">
+        <table class="default">
+            <caption>Proveedores</caption>
+            <tr>
+                <th>NIT</th>
+                <th>Nombre del Proveedor</th>
+                <th>Telefono</th>
+              </tr>
+              <tr>
+                <td>123456789</td>
+                <td>Faber Castle</td>
+                <td>4563214</td>
+              </tr>
+              <tr>
+                <td>987654321</td>
+                <td>Sharpie</td>
+                <td>4598726</td>
+              </tr>
+              <tr>
+                <td>321654987</td>
+                <td>Pointer</td>
+                <td>7539515</td>
+              </tr>
+        </table>
+        <div">
+            <br>
+            <br>
+            <br>
+            <input class="btn" type="button" value="   Guardar Cambios   ">
+            <input class="btn" type="button" value="        Editar        ">
+            <br>
+            <br>
+            <br>
+        </div>  
+    </div>
+</div>
+{% endblock %}

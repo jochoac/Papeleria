@@ -1,0 +1,30 @@
+.items input{
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border:none;
+    outline:none;
+    border-radius: 20px;
+}
+
+.items .textbox{
+    height: 25px;
+    width: 90%;
+}
+
+.items .btn{
+    border-radius: 20px;
+    position: relative;
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    background: #5BA4B3; 
+    width: 30%;
+}
+
+
+caption{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

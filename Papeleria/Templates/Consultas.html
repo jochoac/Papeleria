@@ -1,0 +1,63 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Consultas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href='{% static "css/consultasss.css" %}'>
+
+<div class="row center-xs">
+    <div class="card col-md-10 col-sm-6 col-xs-10  ">
+        <br>
+        <br>
+        <input class="textbox" type="text" placeholder="¿Qué desea consultar?">
+       <br>
+       <br>
+        <table class="default">
+            <caption>Consultar en el Sistema</caption>
+            <tr>
+                <th>ID Empleado</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Salario</th>
+                <th>Cargo</th>
+                <th>Estado</th>
+              </tr>
+              <tr>
+                <td>1234567891</td>
+                <td>Nicolás</td>
+                <td>Montenegro</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>7894561231</td>
+                <td>Juan</td>
+                <td>Rodríguez</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Inactivo</td>
+              </tr>
+              <tr>
+                <td>4569873211</td>
+                <td>Pablo</td>
+                <td>Ochoa</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Inactivo</td>
+              </tr>
+        </table>   
+        <div">
+            <br>
+            <br>
+            <br>
+            <button class="btnimg" type="submit"><img src="{% static 'images/Pdficon.png' %}" alt="x" /></button>
+            <button class="btnimg" type="submit"><img src="{% static 'images/Excelicon.png' %}" alt="x" /></button>                            <br>
+            <br>
+            <br>
+        </div>  
+    </div>
+</div>
+{% endblock %}

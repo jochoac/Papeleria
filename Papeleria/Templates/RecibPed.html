@@ -1,0 +1,52 @@
+{% extends "Base.html"%}
+
+{% load static%}
+
+{% block title %}Recibir Pedido{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/RecibPed.css' %}">
+
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Pedido Recien Llegado</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-4 col-sm-4 col-xs-10 items">
+        <br>
+        <input class="textbox" type="number"required placeholder="Codigo del prodcuto"> 
+        <input class="textbox" type="text" required placeholder="Nombre del Producto">
+        <input class="textbox" type="text" required placeholder="Referencia del Producto">
+        <input class="textbox" type="number" required placeholder="Cantidad">
+        <input class="btn" type="button" value="Registrar">
+    </div>
+    <div class="card col-md-6 col-sm-6 col-xs-10  ">
+        <table class="default">
+            <caption>Inventario</caption>
+            <tr>
+                <th>Código Producto</th>
+                <th>Nombre Producto</th>
+                <th>Referencia</th>
+                <th>Cantidad</th>
+                </tr>
+                <tr>
+                <td>999999999</td>
+                <td>Cuadernos</td>
+                <td>Norma</td>
+                <td>50</td>
+                </tr>
+                <tr>
+                <td>888888888</td>
+                <td>Colores</td>
+                <td>Prismacolor</td>
+                <td>60</td>
+                </tr>
+                <tr>
+                <td>111111111</td>
+                <td>Carpetas</td>
+                <td>Genéricas</td>
+                <td>100</td>
+                </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

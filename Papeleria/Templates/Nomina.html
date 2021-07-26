@@ -1,0 +1,61 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Nómina{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/nominita.css' %}">
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Empleados Registrados Actualmente</h2>
+</header>
+<div class="row center-xs">
+    <div class="card col-md-10 col-sm-6 col-xs-10  ">
+        <table class="default">
+            <caption>Empleados</caption>
+            <tr>
+                <th>ID Empleado</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Salario</th>
+                <th>Cargo</th>
+                <th>Estado</th>
+              </tr>
+              <tr>
+                <td>1234567891</td>
+                <td>Nicolás</td>
+                <td>Montenegro</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>7894561231</td>
+                <td>Juan</td>
+                <td>Rodríguez</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Inactivo</td>
+              </tr>
+              <tr>
+                <td>4569873211</td>
+                <td>Pablo</td>
+                <td>Ochoa</td>
+                <td>$820.000</td>
+                <td>Empleado</td>
+                <td>Inactivo</td>
+              </tr>
+        </table>   
+        <div">
+            <br>
+            <br>
+            <br>
+            <input class="btn" type="button" value="   Guardar Cambios   ">
+            <input class="btn" type="button" value="        Editar        ">
+            <br>
+            <br>
+            <br>
+        </div>  
+    </div>
+</div>
+{% endblock %}

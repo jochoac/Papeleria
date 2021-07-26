@@ -1,0 +1,59 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Registrar Productos{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href='{% static "css/Regispro.css" %}'>
+    
+</head>
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Producto</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-3 col-sm-3 col-xs-10 items">
+        <br>
+        <form action="/registrarproducto/" method = "POST"> {% csrf_token %}
+            <input name = "codigo" class="textbox" type="text"required placeholder="Codigo"> 
+            <input name = "nombre" class="textbox" type="text" required placeholder="Nombre del Producto">
+            <input name = "ref" class="textbox" type="text" required placeholder="Referencia">
+            <input name = "cant" class="textbox" type="number" required placeholder="Cantidad">
+            <input name = "cat" class="textbox" type="text" required placeholder="Categoría">
+            <input name = "price" class="textbox" type="number" required placeholder="Precio">
+            <input name = "enviar" class="btn" type="submit" value="Registrar">
+        </form>      
+    </div>
+    <div id = "divtable" class="card col-md-7 col-sm-7 col-xs-10  "> 
+        <table id="tableProductos">
+            <caption>Inventario</caption>
+            <thead>
+                <tr>
+                    <th data-numeric = "0" data-column= "0" data-order="desc">Codigo &#9660</th>
+                    <th data-numeric = "0" data-column= "1" data-order="desc">Nombre Producto &#9660</th>
+                    <th data-numeric = "0" data-column= "2" data-order="desc">Referencia &#9660</th>
+                    <th data-numeric = "1" data-column= "3" data-order="desc">Cantidad &#9660</th>
+                    <th data-numeric = "0" data-column= "4" data-order="desc">Categoría &#9660</th>
+                    <th data-numeric = "1" data-column= "5" data-order="desc">Precio &#9660</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td >{{producto.Codigo}}</td>
+                <td >{{ producto.Nombre }}</td>
+                <td >{{ producto.Referencia }}</td>
+                <td >{{ producto.Existencia }}</td>
+                <td >{{ producto.Categoria }}</td>
+                <td >{{ producto.Precio }}</td>
+                <td class="editbtn"><a class="btn" href="{% url 'actpro' producto.Codigo %}">Editar</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <script src="{% static 'js/Sorting.js' %}"></script>
+    </div>
+</div>
+{% endblock %} 
