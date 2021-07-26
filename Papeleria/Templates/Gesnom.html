@@ -12,6 +12,7 @@
 <div class ="row center-xs" >
     <div class="card col-md-4 col-sm-4 col-xs-10 items">
         <br>
+<<<<<<< HEAD
         <form action="">
             <select name="empleado" class = "combo">
                 {% for item in empleados %}
@@ -29,6 +30,21 @@
              <input class="btn" type="submit" value="Registrar">
         </form>
         
+=======
+        <select class = "combo">
+            {% for item in empleados %}
+                <option value = '{{item.DNI}}'>{{item.Nombre}} {{item.Apellido}}</option>
+            {% endfor %}
+        </select>
+        <input class="textbox" placeholder="Fecha inicial" type="text" onfocus="(this.type='date')" id="date"> 
+        <input class="textbox" placeholder="Fecha final" type="text" onfocus="(this.type='date')" id="date"> 
+        <input class="textbox" type="number" required placeholder="Salario/Hora">
+        <input class="textbox" type="number" required placeholder="Horas laboradas">
+        <input class="textbox" type="number" required placeholder="Horas extras">
+        <input class="textbox" type="number" required placeholder="Horas dominicales">
+        <input class="textbox" type="text" required placeholder="Salario Total">
+        <input class="btn" type="button" value="Registrar">
+>>>>>>> 341cb6c6eefaf20932530232f80e07b927b532d8
     </div>
     <div class="card col-md-6 col-sm-6 col-xs-10  ">
         <table class="default">

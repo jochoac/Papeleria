@@ -20,14 +20,9 @@ class Empleado(models.Model):
     Apellido = models.CharField(max_length=100)
     Cargo = models.CharField(max_length=100)
     Estado = models.CharField(max_length=10)
+    Password = models.CharField(max_length=100, default='1234')
+    logged = models.BooleanField(default=False)
 
-# Table Cliente
-class Cliente(models.Model):
-    DNI = models.IntegerField(primary_key=True)
-    Nombre = models.CharField(max_length=100)
-    Apellido = models.CharField(max_length=100)    
-    Direccion = models.CharField(max_length=100)
-    Telefono = models.IntegerField()
 
 # Table Proveedor
 class Proveedor(models.Model):
@@ -48,7 +43,6 @@ class Pedido(models.Model):
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
     Empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    Cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     Fecha = models.DateTimeField(auto_now_add=True)
     Total = models.DecimalField(max_digits=10, decimal_places=2)
 

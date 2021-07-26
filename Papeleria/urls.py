@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import Papeleria.views as v
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', v.login, name= 'login'),
+    path('login/',v.loginP , name= 'login'),
+    path('logout/',v.logoutP, name= 'logout'),
     path('productos/', v.productos, name= 'productos'),
     path('consultas/', v.consultas, name= 'consultas'),
     path('gesnom/', v.gesnom, name= 'gesnom'),
