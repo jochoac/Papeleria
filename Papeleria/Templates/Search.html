@@ -1,0 +1,72 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Registrar Productos{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href='{% static "css/Regispro.css" %}'>
+    
+</head>
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Buscar Productos</h2>
+</header>
+<div class ="row center-xs" >
+    <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
+        <table id="tableProductos">
+            <caption>Inventario</caption>
+            <br>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <thead>
+                <tr>
+                    <th data-numeric = "0" data-column= "0" data-order="desc">Código &#9660</th>
+                    <th data-numeric = "0" data-column= "1" data-order="desc">Nombre Producto &#9660</th>
+                    <th data-numeric = "0" data-column= "2" data-order="desc">Referencia &#9660</th>
+                    <th data-numeric = "1" data-column= "3" data-order="desc">Cantidad &#9660</th>
+                    <th data-numeric = "0" data-column= "4" data-order="desc">Categoría &#9660</th>
+                    <th data-numeric = "1" data-column= "5" data-order="desc">Precio &#9660</th>
+                    <th>Añadir al carrito</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td >{{producto.Codigo}}</td>
+                <td >{{ producto.Nombre }}</td>
+                <td >{{ producto.Referencia }}</td>
+                <td >{{ producto.Existencia }}</td>
+                <td >{{ producto.Categoria }}</td>
+                <td >{{ producto.Precio }}</td>
+                <td class="editbtn"><a class="btn" href="">Añadir al carrito</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <script src="{% static 'js/Sorting.js' %}"></script>
+        <script>
+            function myFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("tableProductos");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+            </script>
+    </div>
+</div>
+{% endblock %} 

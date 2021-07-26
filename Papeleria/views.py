@@ -8,7 +8,8 @@ def login(request):
 
 #Temp
 def base(request):
-    return render(request, 'Base.html')
+    productos = Producto.objects.all()
+    return render(request, 'Search.html',{'productos': productos})
 
 def productos(request):
     return render(request, 'Productos.html')
