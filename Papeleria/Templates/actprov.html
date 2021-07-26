@@ -1,0 +1,23 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Actualizar Proveedor{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Regprov.css' %}">
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Actualizar Proveedor</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-4 col-sm-4 col-xs-10 items">
+        <br>
+        <form action="/registrarproveedores/" method = "POST"> {% csrf_token %} 
+            <input value="{{proveedor.NIT}}" name= "nit" class="textbox" type="number"required placeholder="NIT"> 
+            <input value= '{{proveedor.Nombre}}' name="nombre" class="textbox" type="text" required placeholder="Nombre del Proveedor">
+            <input value="{{proveedor.Telefono}}" name="tel" class="textbox" type="number" required placeholder="Telefono">
+            <input class="btn" type="submit" value="Actualizar">
+        </form>
+    </div>
+</div>    
+    {% endblock %}

@@ -13,9 +13,9 @@
     <div class="card col-md-4 col-sm-4 col-xs-10 items">
         <br>
         <select class = "combo">
-            <option>ID Empleado 1</option>
-            <option>ID Empleado 2</option>
-            <option>ID Empleado 3</option>
+            {% for item in empleados %}
+                <option value = '{{item.DNI}}'>{{item.Nombre}} {{item.Apellido}}</option>
+            {% endfor %}
         </select>
         <input class="textbox" placeholder="Fecha inicial" type="text" onfocus="(this.type='date')" id="date"> 
         <input class="textbox" placeholder="Fecha final" type="text" onfocus="(this.type='date')" id="date"> 

@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Papeleria.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/juan/Desktop/PythonProjects/Papeleria/Papeleria/Templates/'],
+        'DIRS': ['/home/juan/Desktop/PythonProjects/Papeleria/Papeleria/Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

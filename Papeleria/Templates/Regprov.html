@@ -37,7 +37,7 @@
                     <td>{{ item.NIT }}</td>
                     <td>{{ item.Nombre }}</td>
                     <td>{{ item.Telefono }}</td>
-                    <td class="editbtn"><a class="btn" href="#">Editar</a></td>
+                    <td class="editbtn"><a class="btn" href="{% url 'actprov' item.NIT %}">Editar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

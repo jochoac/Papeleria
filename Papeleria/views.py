@@ -1,9 +1,25 @@
-from django import http
-from django.http import HttpResponse
 from Datos.models import Empleado, Producto, Proveedor
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
-def login(request):
+def loginP(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            user = Empleado.objects.get(DNI=username, Password=password)
+        
+        except Empleado.DoesNotExist:
+            user = None
+
+        if user is not None:
+            user.logged = True
+            user.save()
+            return render(request, 'Productos.html',{'user': user})
+        else:
+            # messages.error(request, 'Usuario o contraseña incorrectos')
+            return render(request, 'login.html')
     return render(request, 'login.html')
 
 #Temp
@@ -12,19 +28,26 @@ def base(request):
     return render(request, 'Search.html',{'productos': productos})
 
 def productos(request):
-    return render(request, 'Productos.html')
+    empleados = Empleado.objects.all()
+    for empleado in empleados:
+        if empleado.logged == True:
+            return render(request, 'Productos.html', {'user': empleado})
+        return render(request, 'login.html')
+
+def logoutP(request):
+    empleados = Empleado.objects.all()
+    for empleado in empleados:
+        if empleado.logged == True:
+            empleado.logged = False
+            empleado.save()
+            return render(request, 'login.html')
 
 def consultas(request):
     return render(request, 'Consultas.html')
 
 def gesnom(request):
-    return render(request, 'Gesnom.html')
-
-def nomina(request):
-    return render(request, 'Nomina.html')
-
-def proveedores(request):
-    return render(request, 'Proveedores.html')
+    empleados = Empleado.objects.all()
+    return render(request, 'Gesnom.html', {'empleados': empleados})
 
 def recibped(request):
     return render(request,'RecibPed.html')
@@ -51,6 +74,7 @@ def regnom(request):
             DNI=request.POST['id'],
             Nombre=request.POST['nombre'],
             Apellido=request.POST['apellido'],
+            Password = request.POST['pass'],
             Cargo=request.POST['cargo'],
             Estado=request.POST['estado'])
         emp.save()
@@ -71,16 +95,6 @@ def actpro(request,codigo):
 def actempl(request,codigo):
     empleado = Empleado.objects.get(DNI=codigo)
     return render(request, 'Actempl.html', {'empleado': empleado})
-
-def uptemple (request, codigo):
-    emp = Empleado.objects.get(DNI=codigo)
-    emp.Nombre = request.POST['nombre']
-    emp.Apellido = request.POST['apellido']
-    emp.Cargo = request.POST['cargo']
-    emp.Estado = request.POST['estado']
-    emp.save()
-    empleados = Empleado.objects.all()
-    return render(request, 'Regnom.html', {'empleados': empleados})
 
 def regprov(request):
 
@@ -104,3 +118,9 @@ def actualizarP(request, codigo):
     pro.save()
     productos = Producto.objects.all()
     return render(request, 'Regispro.html', {'productos': productos})
+
+def actprov (request, codigo):
+    proveedor = Proveedor.objects.get(NIT=codigo)
+    print(proveedor.Nombre)
+    return render(request, 'actprov.html', {'proveedor': proveedor })
+

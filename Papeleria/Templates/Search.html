@@ -15,9 +15,10 @@
 <div class ="row center-xs" >
     <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
         <table id="tableProductos">
-            <caption>Inventario</caption>
             <br>
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <br>
+            <br>
             <thead>
                 <tr>
                     <th data-numeric = "0" data-column= "0" data-order="desc">Código &#9660</th>
@@ -38,7 +39,6 @@
                 <td >{{ producto.Existencia }}</td>
                 <td >{{ producto.Categoria }}</td>
                 <td >{{ producto.Precio }}</td>
-                <br>
                 <td class="editbtn"><a class="btn" href="">Añadir al carrito</a></td>
             </tr>
             {% endfor %}
