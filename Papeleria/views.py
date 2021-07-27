@@ -36,8 +36,15 @@ def base(request):
     return render(request, 'Search.html',{'productos': productos})
 
 def productos(request):
+<<<<<<< HEAD
+    empleados = Empleado.objects.all()
+    for empleado in empleados:
+        if empleado.logged == True:
+            return render(request, 'Productos.html', {'user': empleado})
+=======
     if checkLG():
         return render(request, 'Productos.html')
+>>>>>>> 53b9a75e030b14c6ec1dc79b1eb01c5d75507866
     return render(request, 'login.html')
 
 def logoutP(request):
