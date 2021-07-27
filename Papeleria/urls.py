@@ -35,5 +35,6 @@ urlpatterns = [
     path('registrarnomina/', v.regnom, name= 'regnom'),
     path('registrarproveedores/', v.regprov, name= 'regprov'),
     path('vender/', v.vender, name= 'vender'),
-    path('base/', v.base),  
+    path('base/', v.base),
+    path('checkout/', v.checkout),
 ]

@@ -39,12 +39,13 @@
                 <td >{{ producto.Existencia }}</td>
                 <td >{{ producto.Categoria }}</td>
                 <td >{{ producto.Precio }}</td>
-                <td class="editbtn"><a class="btn" href="">Añadir al carrito</a></td>
+                <td class="editbtn"><a onclick="addItem('{{producto}}')" class="btn">Añadir al carrito</a></td>
             </tr>
             {% endfor %}
             </tbody>
         </table>
         <script src="{% static 'js/Sorting.js' %}"></script>
+        <script src="{% static 'js/cart.js' %}"></script>
         <script>
             function myFunction() {
               // Declare variables
@@ -67,6 +68,30 @@
                 }
               }
             }
+
+            function addItem(product) {
+              const newProduct = {
+                "id": product.split('%')[0],
+                "name": product.split('%')[1],
+                "price": product.split('%')[4],
+                "amount": 1
+              }
+
+              
+              let currentProducts = [newProduct]
+
+              if (localStorage.getItem("cartProducts") != null) {
+                currentProducts = [newProduct, ...JSON.parse(localStorage.getItem("cartProducts"))]
+              }
+
+              const jsonProducts = JSON.stringify(currentProducts)
+
+              console.log({ product, currentProducts, jsonProducts})
+
+              localStorage.setItem("cartProducts", jsonProducts)
+              const json = localStorage.getItem("cartProducts")
+            }
+
             </script>
     </div>
 </div>

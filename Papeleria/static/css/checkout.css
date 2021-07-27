@@ -1,0 +1,29 @@
+.icon {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.minus {
+  margin-right: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+#checkout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#total {
+  align-self: flex-end;
+}
+
+#table {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
