@@ -32,7 +32,7 @@ def productos(request):
     for empleado in empleados:
         if empleado.logged == True:
             return render(request, 'Productos.html', {'user': empleado})
-        return render(request, 'login.html')
+    return render(request, 'login.html')
 
 def logoutP(request):
     empleados = Empleado.objects.all()
