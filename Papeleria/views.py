@@ -22,16 +22,29 @@ def loginP(request):
             return render(request, 'login.html')
     return render(request, 'login.html')
 
+def checkLG():
+    empleados = Empleado.objects.all()
+    for empleado in empleados:
+        if empleado.logged == True:
+            return True
+    return False
+
+
 #Temp
 def base(request):
     productos = Producto.objects.all()
     return render(request, 'Search.html',{'productos': productos})
 
 def productos(request):
+<<<<<<< HEAD
     empleados = Empleado.objects.all()
     for empleado in empleados:
         if empleado.logged == True:
             return render(request, 'Productos.html', {'user': empleado})
+=======
+    if checkLG():
+        return render(request, 'Productos.html')
+>>>>>>> 53b9a75e030b14c6ec1dc79b1eb01c5d75507866
     return render(request, 'login.html')
 
 def logoutP(request):
@@ -43,84 +56,119 @@ def logoutP(request):
             return render(request, 'login.html')
 
 def consultas(request):
-    return render(request, 'Consultas.html')
+    if checkLG():
+        empleados = Empleado.objects.all()
+        for empleado in empleados:
+            if empleado.logged == True:
+                return render(request, 'Consultas.html')
+        
+    return render(request, 'login.html')
 
 def gesnom(request):
-    empleados = Empleado.objects.all()
-    return render(request, 'Gesnom.html', {'empleados': empleados})
+    if checkLG():
+        empleados = Empleado.objects.all()
+        return render(request, 'Gesnom.html', {'empleados': empleados})
+    return render(request, 'login.html')
 
 def recibped(request):
-    return render(request,'RecibPed.html')
+    if checkLG():
+        return render(request,'RecibPed.html')
+    
+    return render(request, 'login.html' )
 
 def regispro(request): 
-
-    if request.method == 'POST':
-        pro = Producto(
-            Codigo = request.POST['codigo'],
-            Nombre = request.POST['nombre'],
-            Referencia = request.POST['ref'],
-            Categoria = request.POST['cat'],
-            Precio = request.POST['price'],
-            Existencia = request.POST['cant'])
-        pro.save()
-
-    productos = Producto.objects.all()
-    return render(request, 'Regispro.html', {'productos': productos})
+    if checkLG():
+        if request.method == 'POST':
+            pro = Producto(
+                Codigo = request.POST['codigo'],
+                Nombre = request.POST['nombre'],
+                Referencia = request.POST['ref'],
+                Categoria = request.POST['cat'],
+                Precio = request.POST['price'],
+                Existencia = request.POST['cant'])
+            pro.save()
+        productos = Producto.objects.all()
+        return render(request, 'Regispro.html', {'productos': productos})
+        
+    return render(request, 'login.html' )
 
 def regnom(request):
+    if checkLG():
+        if request.method == 'POST':
+            emp = Empleado(
+                DNI=request.POST['id'],
+                Nombre=request.POST['nombre'],
+                Apellido=request.POST['apellido'],
+                Password = request.POST['pass'],
+                Cargo=request.POST['cargo'],
+                Estado=request.POST['estado'])
+            emp.save()
+        empleados = Empleado.objects.all()
+        return render(request, 'Regnom.html', {'empleados': empleados})
 
-    if request.method == 'POST':
-        emp = Empleado(
-            DNI=request.POST['id'],
-            Nombre=request.POST['nombre'],
-            Apellido=request.POST['apellido'],
-            Password = request.POST['pass'],
-            Cargo=request.POST['cargo'],
-            Estado=request.POST['estado'])
-        emp.save()
+    return render(request, 'login.html' )
 
-    empleados = Empleado.objects.all()
-    return render(request, 'Regnom.html', {'empleados': empleados})
+    
 
 def regprov(request): 
-    return render(request, 'Regprov.html')
+    if checkLG():
+        return render(request, 'Regprov.html') 
+
+    return render(request, 'login.html' )
 
 def vender(request):
-    return render(request, 'Vender.html')
+    if checkLG():
+        return render(request, 'Vender.html')
+
+    return render(request, 'login.html')
 
 def actpro(request,codigo):
-    producto = Producto.objects.get(Codigo=codigo)
-    return render(request, 'Actpro.html', {'producto': producto})
+    if checkLG():
+        producto = Producto.objects.get(Codigo=codigo)
+        return render(request, 'Actpro.html', {'producto': producto})
+
+    return render(request, 'login.html' )
 
 def actempl(request,codigo):
-    empleado = Empleado.objects.get(DNI=codigo)
-    return render(request, 'Actempl.html', {'empleado': empleado})
+    if checkLG():
+        empleado = Empleado.objects.get(DNI=codigo)
+        return render(request, 'Actempl.html', {'empleado': empleado})
+    
+    return render(request, 'login.html')
 
 def regprov(request):
+    if checkLG():
+        if request.method == 'POST':
+            pro = Proveedor(
+                NIT = request.POST['nit'],
+                Nombre = request.POST['nombre'],
+                Telefono = request.POST['tel'],)
+            pro.save()
 
-    if request.method == 'POST':
-        pro = Proveedor(
-            NIT = request.POST['nit'],
-            Nombre = request.POST['nombre'],
-            Telefono = request.POST['tel'],)
-        pro.save()
+        prov = Proveedor.objects.all()
+        return render(request, 'Regprov.html',{'proveedores': prov})
 
-    prov = Proveedor.objects.all()
-    return render(request, 'Regprov.html',{'proveedores': prov})
+    return render(request, 'login.html' )
 
 def actualizarP(request, codigo):
-    pro = Producto.objects.get(Codigo=codigo)
-    pro.Nombre = request.POST['nombre']
-    pro.Referencia = request.POST['ref']
-    pro.Categoria = request.POST['cat']
-    pro.Precio = request.POST['price']
-    pro.Existencia = request.POST['cant']
-    pro.save()
-    productos = Producto.objects.all()
-    return render(request, 'Regispro.html', {'productos': productos})
+    if checkLG():
+        pro = Producto.objects.get(Codigo=codigo)
+        pro.Nombre = request.POST['nombre']
+        pro.Referencia = request.POST['ref']
+        pro.Categoria = request.POST['cat']
+        pro.Precio = request.POST['price']
+        pro.Existencia = request.POST['cant']
+        pro.save()
+        productos = Producto.objects.all()
+        return render(request, 'Regispro.html', {'productos': productos})
+
+    return render(request, 'login.html' )
 
 def actprov (request, codigo):
-    proveedor = Proveedor.objects.get(NIT=codigo)
-    print(proveedor.Nombre)
-    return render(request, 'actprov.html', {'proveedor': proveedor })
+    if checkLG(): 
+        proveedor = Proveedor.objects.get(NIT=codigo)
+        print(proveedor.Nombre)
+        return render(request, 'actprov.html', {'proveedor': proveedor })
+
+    return render(request, 'login.html' )
 
