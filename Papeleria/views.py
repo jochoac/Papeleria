@@ -1,4 +1,4 @@
-from Datos.models import Empleado, Producto, Proveedor
+from Datos.models import Empleado, Producto, Proveedor, Nomina
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -36,15 +36,10 @@ def base(request):
     return render(request, 'Search.html',{'productos': productos})
 
 def productos(request):
-<<<<<<< HEAD
     empleados = Empleado.objects.all()
     for empleado in empleados:
         if empleado.logged == True:
             return render(request, 'Productos.html', {'user': empleado})
-=======
-    if checkLG():
-        return render(request, 'Productos.html')
->>>>>>> 53b9a75e030b14c6ec1dc79b1eb01c5d75507866
     return render(request, 'login.html')
 
 def logoutP(request):
@@ -66,8 +61,21 @@ def consultas(request):
 
 def gesnom(request):
     if checkLG():
+        if request.method == 'POST':
+            emp = Nomina(
+                empleado = Empleado.objects.get(DNI=request.POST['empleado']),
+                fechaInicio = request.POST['fechaI'],
+                fechaFin = request.POST['fechaF'],
+                costoHoras = request.POST['salariohora'],
+                horas = request.POST['horaslaboradas'],
+                horasDominicales = request.POST['horasdominicales'],
+                horasExtra = request.POST['horasextras'],
+                salario = request.POST['salariototal']
+                )
+            emp.save()
+        nominas = Nomina.objects.all()
         empleados = Empleado.objects.all()
-        return render(request, 'Gesnom.html', {'empleados': empleados})
+        return render(request, 'Gesnom.html', {'nominas': nominas, 'empleados': empleados})
     return render(request, 'login.html')
 
 def recibped(request):
@@ -89,7 +97,6 @@ def regispro(request):
             pro.save()
         productos = Producto.objects.all()
         return render(request, 'Regispro.html', {'productos': productos})
-        
     return render(request, 'login.html' )
 
 def regnom(request):
@@ -105,7 +112,6 @@ def regnom(request):
             emp.save()
         empleados = Empleado.objects.all()
         return render(request, 'Regnom.html', {'empleados': empleados})
-
     return render(request, 'login.html' )
 
     
@@ -113,21 +119,25 @@ def regnom(request):
 def regprov(request): 
     if checkLG():
         return render(request, 'Regprov.html') 
-
     return render(request, 'login.html' )
 
 def vender(request):
     if checkLG():
         return render(request, 'Vender.html')
-
     return render(request, 'login.html')
 
 def actpro(request,codigo):
     if checkLG():
         producto = Producto.objects.get(Codigo=codigo)
         return render(request, 'Actpro.html', {'producto': producto})
+    return render(request, 'login.html')
 
-    return render(request, 'login.html' )
+def actgesnom(request, codigo):
+    if checkLG():
+        nomina = Nomina.objects.get(codigo=codigo)
+        empleados = Empleado.objects.all()
+        return render( request, 'actgesnom.html', {'nomina': nomina, 'empleados': empleados})
+    return render(request, 'login.html')
 
 def actempl(request,codigo):
     if checkLG():
@@ -163,6 +173,25 @@ def actualizarP(request, codigo):
         return render(request, 'Regispro.html', {'productos': productos})
 
     return render(request, 'login.html' )
+
+def actualizarN(request, codigo):
+    if checkLG():
+        nom = Nomina.objects.get(codigo=codigo)
+        nom.fechaInicio = request.POST['fechaI']
+        nom.fechaFin = request.POST['fechaF']
+        nom.costoHoras = request.POST['salariohora']
+        nom.horas = request.POST['horaslaboradas']
+        nom.horasDominicales = request.POST['horasdominicales']
+        nom.horasExtra = request.POST['horasextras']
+        nom.salario = request.POST['salariototal']
+        nom.save()
+        nominas = Nomina.objects.all()
+        empleados = Empleado.objects.all()
+        return render(request, 'Gesnom.html', {'nominas': nominas, 'empleados': empleados})
+    return render(request, 'login.html')
+
+
+
 
 def actprov (request, codigo):
     if checkLG(): 

@@ -61,7 +61,7 @@ class DetalleVenta(models.Model):
     Cantidad = models.IntegerField()
 
 class Nomina(models.Model):
-    codigo = models.CharField(max_length=20, primary_key=True)
+    codigo = models.AutoField(primary_key=True)
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     fechaInicio = models.DateField()
     fechaFin = models.DateField()

@@ -1,0 +1,35 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Actualizar Nóminas{% endblock %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href='{% static "css/gesnom.css" %}'>  
+
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Actualizar Nóminas</h2>
+</header>
+<div class ="row center-xs" >
+    <div class="card col-md-4 col-sm-4 col-xs-10 items">
+        <br>
+        <form action="{% url 'actualizarN' nomina.codigo %}" method="POST">
+            {% csrf_token %}
+            <select name="empleado" class = "combo">
+                {% for item in empleados %}
+                 <option value="{{item.DNI}}">{{item.Nombre}} {{item.Apellido}}</option>
+                 {% endfor %}
+             </select>
+             <input value = '{{nomina.fechaInicio}}' id="fechaI" name="fechaI" class="textbox" required placeholder="Fecha inicial" type="text" onfocus="(this.type='date')" id="date"> 
+             <input value = '{{nomina.fechaFin}}' id= "fechaF" name="fechaF" class="textbox" required placeholder="Fecha final" type="text" onfocus="(this.type='date')" id="date"> 
+             <input value = '{{nomina.costoHoras}}' id="salariohora" name="salariohora" class="textbox" type="number" required placeholder="Salario/Hora">
+             <input value = '{{nomina.horas}}' id="horaslaboradas" name="horaslaboradas" class="textbox" type="number" required placeholder="Horas laboradas">
+             <input value = '{{nomina.horasExtra}}' id ="horasextras"name="horasextras" class="textbox" type="number" required placeholder="Horas extras">
+             <input value = '{{nomina.horasDominicales}}' id="horasdominicales" name="horasdominicales" class="textbox" type="number" required placeholder="Horas dominicales">
+             <input value = '{{nomina.salario}}' id= "salariototal" onfocus="calcularTotal()" name= "salariototal"class="textbox" type="text" required placeholder="Salario Total">
+             <input class="btn" type="submit" value="Registrar">
+        </form>        
+    </div>
+</div>
+{% endblock %}

@@ -1,64 +1,69 @@
-{% extends "Base.html" %}
+    {% extends "Base.html" %}
 
-{% load static %}
+    {% load static %}
 
-{% block title %}Gestionar Nómina{% endblock %}
+    {% block title %}Gestionar Nómina{% endblock %}
 
-{% block content %}
-<link rel="stylesheet" href="{% static 'css/gesnom.css' %}">
-    <header style="text-align: center;">
-        <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Nómina</h2>
-    </header>
-<div class ="row center-xs" >
-    <div class="card col-md-4 col-sm-4 col-xs-10 items">
-        <br>
-        <form action="">
-            <select name="empleado" class = "combo">
-                {% for item in empleados %}
-                 <option value="{{item.DNI}}">{{item.nombre}} {{item.Apellido}}</option>
-                 {% endfor %}
-     
-             </select>
-             <input name="fechaI" class="textbox" placeholder="Fecha inicial" type="text" onfocus="(this.type='date')" id="date"> 
-             <input name="fechaF" class="textbox" placeholder="Fecha final" type="text" onfocus="(this.type='date')" id="date"> 
-             <input name="salariohora" class="textbox" type="number" required placeholder="Salario/Hora">
-             <input name="horaslaboradas" class="textbox" type="number" required placeholder="Horas laboradas">
-             <input name="horasextras" class="textbox" type="number" required placeholder="Horas extras">
-             <input name="horasdominicales" class="textbox" type="number" required placeholder="Horas dominicales">
-             <input name= "salariototal"class="textbox" type="text" required placeholder="Salario Total">
-             <input class="btn" type="submit" value="Registrar">
-        </form>
-        
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/gesnom.css' %}">
+        <header style="text-align: center;">
+            <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Nómina</h2>
+        </header>
+    <div class ="row center-xs" >
+        <div class="card col-md-4 col-sm-4 col-xs-10 items">
+            <br>
+            <form action="/gesnom/" method="POST">
+                {% csrf_token %}
+                <select name="empleado" class = "combo">
+                    {% for item in empleados %}
+                    <option value="{{item.DNI}}">{{item.Nombre}} {{item.Apellido}}</option>
+                    {% endfor %}
+                </select>
+                <input id="fechaI" name="fechaI" class="textbox" required placeholder="Fecha inicial" type="text" onfocus="(this.type='date')" id="date"> 
+                <input id= "fechaF" name="fechaF" class="textbox" required placeholder="Fecha final" type="text" onfocus="(this.type='date')" id="date"> 
+                <input id="salariohora" name="salariohora" class="textbox" type="number" required placeholder="Salario/Hora">
+                <input id="horaslaboradas" name="horaslaboradas" class="textbox" type="number" required placeholder="Horas laboradas">
+                <input id ="horasextras"name="horasextras" class="textbox" type="number" required placeholder="Horas extras">
+                <input id="horasdominicales" name="horasdominicales" class="textbox" type="number" required placeholder="Horas dominicales">
+                <input id= "salariototal" onfocus="calcularTotal()" name= "salariototal"class="textbox" type="text" required placeholder="Salario Total">
+                <input class="btn" type="submit" value="Registrar">
+            </form>
+            
+        </div>
+        <div id="divtable" class="card col-md-6 col-sm-6 col-xs-10  ">
+            <table class="default">
+                <caption>Nóminas anteriores</caption>
+                <tr><th data-numeric = "1" data-column= "0" data-order="desc">ID Empleado &#9660</th>
+                    <th data-numeric = "0" data-column= "1" data-order="desc">Fecha &#9660</th>
+                    <th data-numeric = "0" data-column= "2" data-order="desc">Nombre &#9660</th>
+                    <th data-numeric = "0" data-column= "3" data-order="desc">Apellido &#9660</th>
+                    <th data-numeric = "0" data-column= "4" data-order="desc">Salario Total &#9660</th>
+                    <th>Editar</th>
+                </tr>
+                {% for item in nominas %}
+                <tr>
+                    <td>{{item.empleado.DNI}}</td>
+                    <td>{{item.fechaFin}}</td>
+                    <td>{{item.empleado.Nombre}}</td>
+                    <td>{{item.empleado.Apellido}}</td>
+                    <td>{{item.salario}}</td>
+                    <td><a href="{% url 'actgesnom' item.codigo%}">Editar</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <script>
+                function calcularTotal(){
+                    let sHora = document.getElementById("salariohora").value;
+                    let hExtras = document.getElementById("horasextras").value;
+                    let horas = document.getElementById("horaslaboradas").value;
+                    let hDomic = document.getElementById("horasdominicales").value;
+                    let salarioBase = sHora * horas;
+                    let sExtras = (sHora*0.25)*hExtras;
+                    let sDominicales = (sHora*0.75)*hDomic;
+                    let salarioTotal = salarioBase + sExtras + sDominicales;
+                    document.getElementById("salariototal").value = salarioTotal;
+                }
+            </script>
+        </div>
     </div>
-    <div id="divtable" class="card col-md-6 col-sm-6 col-xs-10  ">
-        <table class="default">
-            <caption>Nóminas anteriores</caption>
-            <tr><th data-numeric = "1" data-column= "0" data-order="desc">ID Empleado &#9660</th>
-                <th data-numeric = "0" data-column= "1" data-order="desc">Fecha &#9660</th>
-                <th data-numeric = "0" data-column= "2" data-order="desc">Nombre &#9660</th>
-                <th data-numeric = "0" data-column= "3" data-order="desc">Apellido &#9660</th>
-                <th data-numeric = "0" data-column= "4" data-order="desc">Salario Total &#9660</th>
-                <th>Editar</th>
-                </tr>
-                <tr>
-                <td>01/04/2021</td>
-                <td>Nicolás</td>
-                <td>Montenegro</td>
-                <td>$900.000</td>
-                </tr>
-                <tr>
-                <td>15/03/2021</td>
-                <td>Juan</td>
-                <td>Rodríguez</td>
-                <td>$800.000</td>
-                </tr>
-                <tr>
-                <td>01/03/2021</td>
-                <td>Pablo</td>
-                <td>Ochoa</td>
-                <td>$820.000</td>
-                </tr>
-        </table>
-    </div>
-</div>
-{% endblock %}
+    {% endblock %}
