@@ -10,8 +10,9 @@ class Producto(models.Model):
     Precio = models.DecimalField(max_digits=10, decimal_places=2)
     Existencia = models.IntegerField()
 
+
     def __str__(self):
-        return self.Nombre + ' ' + self.Referencia + ' ' + self.Categoria + ' ' + str(self.Precio) + ' ' + str(self.Existencia)
+        return self.Codigo + '%' + self.Nombre + '%' + self.Referencia + '%' + self.Categoria + '%' + str(self.Precio) + '%' + str(self.Existencia)
 
 # Table Empleado
 class Empleado(models.Model):

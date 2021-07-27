@@ -1,0 +1,189 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Registrar Productos{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href='{% static "css/checkout.css" %}'>
+    
+</head>
+<header style="text-align: center;">
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >checkout</h2>
+</header>
+<div class ="row center-xs" >
+  <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
+  </div>
+    
+</div>
+  <script> 
+    function removeProduct(product) {
+      let currentProducts = JSON.parse(localStorage.getItem('cartProducts'))
+      let newProducts = []
+
+      for (item of currentProducts) {
+        if (item['id'] === product['id']) {
+          if (product['amount'] === 1) continue
+          item.amount -= 1
+        }
+
+        newProducts.push(item)
+      }
+
+      newProducts = JSON.stringify(newProducts)
+      localStorage.setItem('cartProducts', newProducts)
+      render()
+    }
+
+    function addProduct(product) {
+      let newProducts = JSON.parse(localStorage.getItem('cartProducts'))
+      newProducts = newProducts.map(item => {
+        if (item['id'] === product['id']) item.amount += 1
+        return item
+      })
+
+      newProducts = JSON.stringify(newProducts)
+      localStorage.setItem('cartProducts', newProducts)
+      render()
+    }
+
+    function loadIcons (product) {
+      const row = document.createElement('div')
+      row.className = 'row'
+
+      const minusIcon = document.createElement('div')
+      const plusIcon = document.createElement('div')
+      
+      minusIcon.innerText = '-'
+      plusIcon.innerText = '+'
+      minusIcon.className = 'icon minus'
+      plusIcon.className = 'icon'
+
+      minusIcon.addEventListener('click', () => {
+        removeProduct(product)
+      })
+
+      plusIcon.addEventListener('click', () => {
+        addProduct(product)
+      })
+  
+      row.append(minusIcon)
+      row.append(plusIcon)
+      return row
+    }
+
+    function makeElem(product) {
+
+        const tr = document.createElement('tr')
+
+        const tdId = document.createElement('td')
+        const tdName = document.createElement('td')
+        const tdPrice = document.createElement('td')
+        const tdAmount = document.createElement('td')
+        const tdIcons = document.createElement('td')
+
+        tdId.innerText = `${product['id']}`
+        tdName.innerText = `${product['name']}`
+        tdPrice.innerText = `${product['price']}`
+        tdAmount.innerText = `${product['amount']}`
+        const icons = loadIcons(product)
+        tdIcons.appendChild(icons)
+        
+        tr.appendChild(tdId)
+        tr.appendChild(tdName)
+        tr.appendChild(tdPrice)
+        tr.appendChild(tdAmount)
+        tr.appendChild(tdIcons)
+        return tr
+    }
+
+    function renderHeader() {
+      const thead = document.createElement('thead')
+
+      const tr = document.createElement('tr')
+      const thId = document.createElement('th')
+      const thName = document.createElement('th')
+      const thPrecio = document.createElement('th')
+      const thAmount = document.createElement('th')
+      const thIcons = document.createElement('th')
+
+      thId.innerText = 'Codigo'
+      thName.innerText = 'Nombre'
+      thPrecio.innerText = 'Precio'
+      thAmount.innerText = 'Cantidad'
+
+      tr.appendChild(thId)
+      tr.appendChild(thName)
+      tr.appendChild(thPrecio)
+      tr.appendChild(thAmount)
+      tr.appendChild(thIcons)
+      thead.appendChild(tr)
+      return thead
+    }
+
+    function renderProducts() {
+      const currentList = document.getElementById('product-table')
+      if (currentList) currentList.remove()
+
+      const values = JSON.parse(localStorage.getItem('cartProducts'))
+      
+      const listContainer = document.createElement('table')
+      listContainer.id = 'table'
+      const tbody = document.createElement('tbody')
+      for (item of values) {
+        const tr = makeElem(item)
+        tbody.appendChild(tr)
+      }
+      const thead = renderHeader()
+      listContainer.append(thead)
+      listContainer.append(tbody)
+      return listContainer
+    }
+
+    function renderTotal() {
+      const currentList = document.getElementById('total')
+      if (currentList) currentList.remove()
+
+      const values = JSON.parse(localStorage.getItem('cartProducts'))
+      const total = document.createElement('div')
+      total.id = 'total'
+
+      let totalValue = 0
+
+      for (item of values) {
+        totalValue += parseFloat(item['price']) * parseFloat(item['amount'])
+      }
+
+      total.innerHTML = `<b>Total:</b> ${totalValue}`
+
+      return total
+    }
+    
+
+    // render screen
+    function render() {
+      const currentList = document.getElementById('checkout')
+      if (currentList) currentList.remove()
+
+      const list = document.getElementById('divtable')
+      const checkout = document.createElement('div')
+      checkout.id = 'checkout'
+
+      const products = renderProducts()
+      const total = renderTotal()
+
+      checkout.appendChild(products)
+      checkout.appendChild(total)
+      list.append(checkout)
+    }
+
+    let currentProducts = JSON.parse(localStorage.getItem('cartProducts'))
+
+    currentProducts = JSON.stringify(newProducts)
+
+    render()
+  </script>  
+  <script src="{% static 'js/checkout.js' %}"></script>
+</div>
+{% endblock %} 

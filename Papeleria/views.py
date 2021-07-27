@@ -201,3 +201,7 @@ def actprov (request, codigo):
 
     return render(request, 'login.html' )
 
+
+def checkout (request):
+    return render(request, 'Checkout.html')
+
