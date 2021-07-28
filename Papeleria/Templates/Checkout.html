@@ -17,7 +17,17 @@
     <br>
     <br>
   </div>
-    
+  <div id="divtotal" class="card col-md-10 col-sm-10 col-xs-10">
+    <label id="lbltotal"for="Total">Total:</label>
+    <input type="text" id="totaltxt" readonly>
+    <a href="/checkout/"><button id="cartbutton">Confirmar compra</button></a>
+    <a href="/checkout/"><button id="cartbutton">Cancelar compra</button></a>
+  </div>  
+</div>
+</div class ="row center-xs">
+  
+<div>
+
 </div>
   <script> 
     function removeProduct(product) {
@@ -157,7 +167,9 @@
         totalValue += parseFloat(item['price']) * parseFloat(item['amount'])
       }
 
-      total.innerHTML = `<b>Total:</b> ${totalValue}`
+      const tot = document.getElementById('totaltxt')
+      tot.value = totalValue.toFixed(2)
+      
 
       return total
     }
@@ -176,7 +188,7 @@
       const total = renderTotal()
 
       checkout.appendChild(products)
-      checkout.appendChild(total)
+      // checkout.appendChild(total)
       list.append(checkout)
     }
 
