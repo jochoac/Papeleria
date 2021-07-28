@@ -16,7 +16,8 @@
     <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
         <table id="tableProductos">
             <br>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca un producto...">
+            <a href="/checkout/"><button id="cartbutton">Ir al carrito</button></a>
             <br>
             <br>
             <thead>
@@ -39,13 +40,12 @@
                 <td >{{ producto.Existencia }}</td>
                 <td >{{ producto.Categoria }}</td>
                 <td >{{ producto.Precio }}</td>
-                <td class="editbtn"><a onclick="addItem('{{producto}}')" class="btn">Añadir al carrito</a></td>
+                <td><button onclick="addItem('{{producto}}')" class="btnimg" type="submit"><img src="{% static 'images/cart.png' %}" alt="x" /></button></td>
             </tr>
             {% endfor %}
             </tbody>
         </table>
         <script src="{% static 'js/Sorting.js' %}"></script>
-        <script src="{% static 'js/cart.js' %}"></script>
         <script>
             function myFunction() {
               // Declare variables
@@ -92,7 +92,7 @@
               const json = localStorage.getItem("cartProducts")
             }
 
-            </script>
+        </script>
     </div>
 </div>
 {% endblock %} 

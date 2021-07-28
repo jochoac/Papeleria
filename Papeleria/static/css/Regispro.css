@@ -8,6 +8,18 @@
     border-radius: 20px;
 }
 
+.combo{
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    height:28px;
+    width:90%;
+    border:none;
+    outline:none;
+    border-radius: 20px;
+}
+
 .items .textbox{
     height: 25px;
     width: 90%;
@@ -41,12 +53,38 @@ caption{
 }
 
 #myInput {
-    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 80%; /* Full-width */
+    width: 60%; /* Full-width */
     font-size: 16px; /* Increase font-size */
     padding: 12px 20px 12px 40px; /* Add some padding */
     border: 1px solid #ddd; /* Add a grey border */
     border-radius: 20px;
-  }
+}
+
+#cartbutton{
+    background-color: #5BA4B3;
+    cursor: pointer;
+    margin-left: 8%;
+    border-radius: 20px;
+    border:none;
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    width: 20%;
+}
+
+img{
+    width: 50px;
+}
+
+.btnimg{
+    cursor:pointer;
+    border-radius: 50%;
+    height: fit-content;
+    width:fit-content;
+    background-color: transparent;
+    border:none;
+}
+
+.btnimg:hover{
+    background-color: #5BA4B3;
+}

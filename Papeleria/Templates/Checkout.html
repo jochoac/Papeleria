@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Registrar Productos{% endblock %}
+{% block title %}Checkout{% endblock %}
 
 {% block content %}
 <head>
@@ -14,6 +14,8 @@
 </header>
 <div class ="row center-xs" >
   <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
+    <br>
+    <br>
   </div>
     
 </div>
@@ -180,7 +182,7 @@
 
     let currentProducts = JSON.parse(localStorage.getItem('cartProducts'))
 
-    currentProducts = JSON.stringify(newProducts)
+    currentProducts = JSON.stringify(currentProducts)
 
     render()
   </script>  

@@ -31,9 +31,17 @@ def checkLG():
 
 
 #Temp
-def base(request):
-    productos = Producto.objects.all()
-    return render(request, 'Search.html',{'productos': productos})
+def cart(request, categoria=None):
+    if checkLG():
+        if categoria is None:
+            productos = Producto.objects.all()
+            return render(request, 'Search.html',{'productos': productos})
+        else:
+            productos = Producto.objects.filter(Categoria=categoria)
+            return render(request, 'Search.html',{'productos': productos})
+    return render(request, 'login.html')
+
+    
 
 def productos(request):
     empleados = Empleado.objects.all()

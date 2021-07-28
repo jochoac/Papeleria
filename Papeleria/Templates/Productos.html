@@ -9,74 +9,98 @@
 <div class="productos">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-1">
-            <div class="card">
-                <img src='{% static "images/notebook.png" %}' alt="imagen de un cuaderno">
+            <div class="card item">
+                <a href="{% url 'cart' 'Cuadernos' %}">
+                    <img src='{% static "images/notebook.png" %}' alt="imagen de un cuaderno">
+                </a>
                 <h3>Cuadernos</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-2">
-            <div class="card">
-                <img src='{% static "images/folder.png" %}' alt="imagen de una carpeta">
+            <div class="card item">
+                <a href="{% url 'cart' 'Carpetas' %}">
+                    <img src='{% static "images/folder.png" %}' alt="imagen de una carpeta">
+                </a>
                 <h3>Carpetas</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-3">
-            <div class="card">
-                <img src='{% static  "images/pencil.png" %}' alt="Imagen de un lapiz">
+            <div class="card item">
+                <a href="{% url 'cart' 'Lapices' %}">
+                    <img src='{% static  "images/pencil.png" %}' alt="Imagen de un lapiz">
+                </a>
                 <h3>Lápices</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-4">
-            <div class="card">
-                <img src='{% static "images/Factu.png" %}' alt="Imagen de una factura">
-                <h3>Facturas</h3>
+            <div class="card item">
+                <a href="{% url 'cart' 'Documentos' %}">
+                    <img src='{% static "images/Factu.png" %}' alt="Imagen de una factura">
+                </a>
+                <h3>Documentos</h3>
             </div>
         </div>  
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-5">
-            <div class="card">
-                <img src='{% static "images/Marcadorcito.png" %}' alt="Imagen de un marcador">
+            <div class="card item">
+                <a href="{% url 'cart' 'Marcadores' %}">
+                    <img src='{% static "images/Marcadorcito.png" %}' alt="Imagen de un marcador">
+                </a>
                 <h3>Marcadores</h3>
             </div>   
         </div> 
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-6">
-            <div class="card">
-                <img src='{% static  "images/Paper.png" %}' alt="Imagen de un papel">
+            <div class="card item">
+                <a href="{% url 'cart' 'Papel' %}">
+                    <img src='{% static  "images/Paper.png" %}' alt="Imagen de un papel">
+                </a>
                 <h3>Papel</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-7">
-            <div class="card">
-                <img src='{% static "images/Esfero.png" %}' alt="Imagen de un Esfero">
+            <div class="card item">
+                <a href="{% url 'cart' 'Esferos' %}">
+                    <img src='{% static "images/Esfero.png" %}' alt="Imagen de un Esfero">
+                </a>
                 <h3>Esferos</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-8">
-            <div class="card">
-                <img src='{%  static "images/Colors.png"%}' alt="Imagen de unos colores">
+            <div class="card item">
+                <a href="{% url 'cart' 'Colores' %}">
+                    <img src='{%  static "images/Colors.png"%}' alt="Imagen de unos colores">
+                </a>
                 <h3>Colores</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-9">
-            <div class="card">
-                <img src='{% static "images/Tijerayglue.png" %}' alt="Imagen de un pegante y unas tijeras">
+            <div class="card item">
+                <a href="{% url 'cart' 'Herramientas' %}">
+                    <img src='{% static "images/Tijerayglue.png" %}' alt="Imagen de un pegante y unas tijeras">
+                </a>
                 <h3>Herramientas y Pegantes</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-10">
-            <div class="card">
-                <img src='{%  static "images/Rulers.png"%}' alt="Imagen de unas reglas">
+            <div class="card item">
+                <a href="{% url 'cart' 'Reglas' %}">
+                    <img src='{%  static "images/Rulers.png"%}' alt="Imagen de unas reglas">
+                </a>
                 <h3>Reglas y Escuadras</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-11">
-            <div class="card">
-                <img src='{%  static "images/others.png" %}' alt="Imagen de una estrella">
+            <div class="card item">
+                <a href="{% url 'cart' 'Otros' %}">
+                    <img src='{%  static "images/others.png" %}' alt="Imagen de una estrella">
+                </a>
                 <h3>Otros Productos</h3>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 product animated flipInY delay-12">
             <div class="card">
-                <img src='{%  static  "images/Todoslosprodcutos.png"%}' alt="Imagen de unas cajas">
+                <a href="{% url 'cart' %}">
+                    <img src='{%  static  "images/Todoslosprodcutos.png"%}' alt="Imagen de unas cajas">
+                </a>
                 <h3>Todos Los Productos</h3>
             </div>
         </div>

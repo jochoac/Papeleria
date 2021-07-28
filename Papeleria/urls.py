@@ -37,6 +37,8 @@ urlpatterns = [
     path('registrarnomina/', v.regnom, name= 'regnom'),
     path('registrarproveedores/', v.regprov, name= 'regprov'),
     path('vender/', v.vender, name= 'vender'),
-    path('base/', v.base),
+    path('cart/<str:categoria>',v.cart, name= 'cart'),
+    path('cart/',v.cart, name= 'cart'),
+    #path('base/', v.base),
     path('checkout/', v.checkout),
 ]

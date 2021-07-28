@@ -69,6 +69,11 @@ body{
     background-color: rgba(204, 235, 237, 0.781);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
+
+.item:hover{
+    background-color: #558b99;
+}
+
 .product img
 {   width: 150px;
 }
