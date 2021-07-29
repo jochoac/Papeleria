@@ -1,7 +1,20 @@
-from Datos.models import Empleado, Producto, Proveedor, Nomina
+from Datos.models import Empleado, Producto, Proveedor, Nomina, Venta
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+
+
+def end_venta(request):
+    if checkLG():
+        print(request.POST)
+        total = request.POST['total']
+        # tabla = request.POST['codigo']
+        print(total)
+        sesion = Empleado.objects.get(logged=True)
+        # venta = Venta(Empleado = sesion, Total=total)
+        # venta.save()
+        return render(request, 'Checkout.html')
+    return render(request, 'login.html')
 
 def loginP(request):
     if request.method == 'POST':
@@ -29,8 +42,6 @@ def checkLG():
             return True
     return False
 
-
-#Temp
 def cart(request, categoria=None):
     if checkLG():
         if categoria is None:
