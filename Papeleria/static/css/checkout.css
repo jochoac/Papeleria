@@ -11,6 +11,25 @@
   display: flex;
 }
 
+.endbtn{
+  border:none;
+  margin-left:5%;
+  width: 20%;
+  border-radius: 20px;
+  padding: 12px 0px 12px 0px; /* Add some padding */
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#confirm{
+  background-color: #419f80;
+}
+
+#cancel{
+  background-color: #c5221f;
+}
+
 #checkout {
   height: 100%;
   display: flex;
@@ -25,6 +44,8 @@
 
 #totaltxt {
   border:none;
+  padding-top:1%;
+  padding-bottom: 1%;
   width: 20%;
   text-align: center;
   user-select: none;
@@ -32,7 +53,6 @@
   background-color: rgb(243, 240, 240);
   margin-bottom: 20px;
   font-size: 16px; /* Increase font-size */
-  padding: 12px 20px 12px 40px; /* Add some padding */
   border-radius: 20px;
 }
 

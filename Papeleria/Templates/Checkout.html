@@ -10,19 +10,22 @@
     
 </head>
 <header style="text-align: center;">
-    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >checkout</h2>
+    <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Finalizar compra</h2>
 </header>
 <div class ="row center-xs" >
   <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
-    <br>
-    <br>
+    <form id="formulario" method="POST" action="{% url 'endventa' %}">
+      {% csrf_token %}
+      <br>
+      <div id="divtotal" class="card col-md-12 col-sm-12 col-xs-12">
+        <label id="lbltotal"for="Total">Total:</label>
+        <input name="total" type="text" id="totaltxt" readonly>
+        <a href="#"><button type="submit" class="endbtn" id="confirm">Confirmar compra</button></a>
+        <a href="#"><button onclick="clearCart()" class="endbtn" id="cancel">Cancelar compra</button></a>
+      </div>  
+      <br>
+    </form>
   </div>
-  <div id="divtotal" class="card col-md-10 col-sm-10 col-xs-10">
-    <label id="lbltotal"for="Total">Total:</label>
-    <input type="text" id="totaltxt" readonly>
-    <a href="/checkout/"><button id="cartbutton">Confirmar compra</button></a>
-    <a href="/checkout/"><button id="cartbutton">Cancelar compra</button></a>
-  </div>  
 </div>
 </div class ="row center-xs">
   
@@ -30,6 +33,13 @@
 
 </div>
   <script> 
+    function clearCart(){
+      alert('La compra ha sido cancelada.')
+      localStorage.clear();
+      let total = document.getElementById("totaltxt");
+      total.value = "No hay productos en el carrito";
+      render()
+    }
     function removeProduct(product) {
       let currentProducts = JSON.parse(localStorage.getItem('cartProducts'))
       let newProducts = []
@@ -125,6 +135,8 @@
       thPrecio.innerText = 'Precio'
       thAmount.innerText = 'Cantidad'
 
+      thId.setAttribute('name', 'codsss')
+
       tr.appendChild(thId)
       tr.appendChild(thName)
       tr.appendChild(thPrecio)
@@ -142,6 +154,7 @@
       
       const listContainer = document.createElement('table')
       listContainer.id = 'table'
+      listContainer.setAttribute('name','tablaF')
       const tbody = document.createElement('tbody')
       for (item of values) {
         const tr = makeElem(item)
@@ -180,7 +193,7 @@
       const currentList = document.getElementById('checkout')
       if (currentList) currentList.remove()
 
-      const list = document.getElementById('divtable')
+      const list = document.getElementById('formulario')
       const checkout = document.createElement('div')
       checkout.id = 'checkout'
 
