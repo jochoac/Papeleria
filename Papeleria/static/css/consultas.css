@@ -1,0 +1,30 @@
+img
+{   width: 50px;
+}
+
+.btnimg{
+    padding: 15px;
+    border-radius: 50%;
+    height: fit-content;
+    width:fit-content;
+    background: #5BA4B3; 
+    border:none;
+}
+
+select{
+    display: inline-block;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 28px;
+    margin-bottom: 10px;
+    height: 40px;
+    width:30%;
+    border:none;
+    outline:none;
+    border-radius: 20px;
+    padding-left: 10%;
+}
+
+caption{
+    padding-bottom: 10px;
+    padding-top: 10px;
+} 
