@@ -47,15 +47,16 @@
         </table>
         <script src="{% static 'js/Sorting.js' %}"></script>
         <script>
+            //Funcion para buscar un producto
             function myFunction() {
-              // Declare variables
+              // Declarar variables
               var input, filter, table, tr, td, i, txtValue;
               input = document.getElementById("myInput");
               filter = input.value.toUpperCase();
               table = document.getElementById("tableProductos");
               tr = table.getElementsByTagName("tr");
             
-              // Loop through all table rows, and hide those who don't match the search query
+              // Iterar a travs de las filas de la tabla, y esconder las que no coinciden con el término de búsqueda
               for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[1];
                 if (td) {
@@ -70,14 +71,15 @@
             }
 
             function addItem(product) {
-              const newProduct = {
+              //product = codigo%nombre%referencia%cantidad%precio
+              const newProduct = 
+              {
                 "id": product.split('%')[0],
                 "name": product.split('%')[1],
                 "price": product.split('%')[4],
                 "amount": 1
               }
-
-              
+  
               let currentProducts = [newProduct]
 
               if (localStorage.getItem("cartProducts") != null) {
@@ -91,7 +93,6 @@
               localStorage.setItem("cartProducts", jsonProducts)
               const json = localStorage.getItem("cartProducts")
             }
-
         </script>
     </div>
 </div>
