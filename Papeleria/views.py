@@ -1,4 +1,4 @@
-from Datos.models import Empleado, Producto, Proveedor, Nomina, Venta
+from Datos.models import Empleado, Pedido, Producto, Proveedor, Nomina, Venta
 from django.shortcuts import render
 from Datos.views import checkLG
   
@@ -58,4 +58,29 @@ def actprov (request, codigo):
 # Funcion para ir al carrito
 def checkout (request):
     return render(request, 'Checkout.html')
+
+def consulta (request, categoria=None):
+    if checkLG():
+        if categoria == 'Productos':
+            retorno = Producto.objects.all()
+            headers = Producto.getColumns()
+        elif categoria == 'Proveedores':
+            retorno = Proveedor.objects.all()
+            headers = Proveedor.getColumns()
+        elif categoria == 'Nomina':
+            retorno = Empleado.objects.all()
+            headers = Empleado.getColumns()
+        elif categoria == 'Ventas':
+            retorno = Venta.objects.all()
+            headers = Venta.getColumns()
+        elif categoria == 'Pedidos':
+            retorno = Pedido.objects.all()
+            headers = Pedido.getColumns()
+        else:
+            retorno = Producto.objects.all()
+            headers = Producto.getColumns()
+        
+        return render(request, 'Consultas.html', {'headers':headers, 'retorno':retorno})
+    return render(request,'login.html')  
+
 

@@ -11,49 +11,26 @@
     <div class="card col-md-10 col-sm-6 col-xs-10  ">
         <br>
         <br>
-        <select name="Consulta" id="combo" placeholder="Seleccione su consulta.">
-          <option>Productos</option>
-          <option>Proveedores</option>
-          <option>Nomina</option>
-          <option>Ventas</option>
-          <option>Pedidos</option>
-        </select>
+        <form action="{% url 'consulta' Proveedores %}">
+          <select type="submit" name="Consulta" id="combo" placeholder="Seleccione su consulta.">
+            <option>Productos</option>
+            <option>Proveedores</option>
+            <option>Nomina</option>
+            <option>Ventas</option>
+            <option>Pedidos</option>
+          </select>
+          <button type="submit">Buscar</button>
+        </form>
+        
        <br>
        <br>
         <table class="default">
             <caption>Consultar en el Sistema</caption>
             <tr>
-                <th>ID Empleado</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Salario</th>
-                <th>Cargo</th>
-                <th>Estado</th>
-              </tr>
-              <tr>
-                <td>1234567891</td>
-                <td>Nicolás</td>
-                <td>Montenegro</td>
-                <td>$820.000</td>
-                <td>Empleado</td>
-                <td>Activo</td>
-              </tr>
-              <tr>
-                <td>7894561231</td>
-                <td>Juan</td>
-                <td>Rodríguez</td>
-                <td>$820.000</td>
-                <td>Empleado</td>
-                <td>Inactivo</td>
-              </tr>
-              <tr>
-                <td>4569873211</td>
-                <td>Pablo</td>
-                <td>Ochoa</td>
-                <td>$820.000</td>
-                <td>Empleado</td>
-                <td>Inactivo</td>
-              </tr>
+              {% for item in headers %}
+              <th>{{item}}</th>
+              {% endfor %}
+            </tr>
         </table>   
         <div">
             <br>
