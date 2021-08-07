@@ -1,2 +1,4 @@
 __pycache__/
 *.py[cod]
+Papeleria/__pycache__/urls.cpython-39.pyc
+Papeleria/__pycache__/views.cpython-39.pyc
