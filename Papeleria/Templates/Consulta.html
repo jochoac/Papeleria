@@ -1,0 +1,26 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block title %}Consultas{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href='{% static "css/consultas.css" %}'>
+
+<div class="row center-xs">
+    <div class="card col-md-10 col-sm-6 col-xs-10  ">
+        <br>
+        <br>
+        <form action="#">
+          <select type="submit" name="Consulta" id="combo" placeholder="Seleccione su consulta.">
+            <option>Productos</option>
+            <option>Proveedores</option>
+            <option>Nomina</option>
+            <option>Ventas</option>
+            <option>Pedidos</option>
+          </select>
+          <button type="submit">Buscar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

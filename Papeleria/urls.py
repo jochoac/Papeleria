@@ -24,7 +24,6 @@ urlpatterns = [
     path('login/',dv.loginP , name= 'login'),
     path('logout/',dv.logoutP, name= 'logout'),
     path('productos/', v.productos, name= 'productos'),
-    path('consulta/<str:categoria>', v.consulta, name= 'consulta'),
     path('consulta/', v.consulta, name= 'consulta'),
     path('gesnom/', dv.gesnom, name= 'gesnom'),
     path('gesnom/<str:codigo>', dv.actualizarN, name= 'actualizarN'),

@@ -11,32 +11,70 @@
     <div class="card col-md-10 col-sm-6 col-xs-10  ">
         <br>
         <br>
-        <form action="{% url 'consulta' Proveedores %}">
-          <select type="submit" name="Consulta" id="combo" placeholder="Seleccione su consulta.">
+        <form action="/consulta/" method="POST">
+          {% csrf_token %}
+          <select name="comboc" placeholder="Seleccione su consulta.">
+            <option hidden selected>{{categoria}}</option>
             <option>Productos</option>
             <option>Proveedores</option>
             <option>Nomina</option>
             <option>Ventas</option>
             <option>Pedidos</option>
           </select>
-          <button type="submit">Buscar</button>
+          <input name = "enviar" class="btn" type="submit" value="Buscar">
         </form>
-        
        <br>
        <br>
         <table class="default">
             <caption>Consultar en el Sistema</caption>
-            <tr>
-              {% for item in headers %}
-              <th>{{item}}</th>
+            <thead>
+              <tr>
+                {% for item in headers %}
+                <th>{{item}}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in retorno %}
+              <tr>
+                {% if categoria == 'Productos' %}
+                  <td>{{item.Codigo}}</td>
+                  <td>{{item.Nombre}}</td>
+                  <td>{{item.Referencia}}</td>
+                  <td>{{item.Categoria}}</td>
+                  <td>{{item.Precio}}</td>
+                  <td>{{item.Existencia}}</td>
+                {% elif categoria == 'Proveedores' %}
+                  <td>{{item.NIT}}</td>
+                  <td>{{item.Nombre}}</td>
+                  <td>{{item.Telefono}}</td>
+                {% elif categoria == 'Nomina' %}
+                  <td>{{item.DNI}}</td>
+                  <td>{{item.Nombre}}</td>
+                  <td>{{item.Apellido}}</td>
+                  <td>{{item.Cargo}}</td>
+                  <td>{{item.Estado}}</td>
+                {% elif categoria == 'Ventas' %}
+                  <td>{{item.id}}</td>
+                  <td>{{item.Empleado.Nombre}} {{item.Empleado.Apellido}}</td>
+                  <td>{{item.Fecha}}</td>
+                  <td>{{item.Total}}</td>
+                {% elif categoria == 'Pedidos' %}
+                  <td>{{item.id}}</td>
+                  <td>{{item.Empleado.Nombre}} {{item.Empleado.Apellido}}</td>
+                  <td>{{item.Proveedor.Nombre}}</td>
+                  <td>{{item.Fecha}}</td>
+                  <td>{{item.Hora}}</td>
+                  <td>{{item.Total}}</td>
+                {% endif %}
+              </tr>
               {% endfor %}
-            </tr>
+            </tbody>
         </table>   
         <div">
             <br>
             <br>
             <br>
-            <button class="btnimg" type="submit"><img src="{% static 'images/Pdficon.png' %}" alt="x" /></button>
             <button class="btnimg" type="submit"><img src="{% static 'images/Excelicon.png' %}" alt="x" /></button>                            <br>
             <br>
             <br>
