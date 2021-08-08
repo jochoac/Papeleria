@@ -13,23 +13,20 @@
     <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Finalizar compra</h2>
 </header>
 <div class ="row center-xs" >
-  <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10  "> 
-    <form id="formulario" method="POST" action="{% url 'endventa' %}">
-      {% csrf_token %}
+  <div id = "divtable" class="card col-md-10 col-sm-10 col-xs-10"> 
+    {% csrf_token %}
       <br>
       <div id="divtotal" class="card col-md-12 col-sm-12 col-xs-12">
         <label id="lbltotal"for="Total">Total:</label>
         <input name="total" type="text" id="totaltxt" readonly>
-        <a href="#"><button type="submit" class="endbtn" id="confirm">Confirmar compra</button></a>
+        <a href="/productos/"><button class="endbtn" id="confirm">Confirmar compra</button></a>
         <a href="#"><button onclick="clearCart()" class="endbtn" id="cancel">Cancelar compra</button></a>
       </div>  
       <br>
-    </form>
   </div>
 </div>
   <script> 
-
-    //Funcion para limpiar el carrito
+    //Funcion para limpiar el carrito de compras
     function clearCart(){
       alert('La compra ha sido cancelada.')
       localStorage.clear();
@@ -197,7 +194,7 @@
       const currentList = document.getElementById('checkout')
       if (currentList) currentList.remove()
 
-      const list = document.getElementById('formulario')
+      const list = document.getElementById('divtable')
       const checkout = document.createElement('div')
       checkout.id = 'checkout'
 
@@ -214,6 +211,40 @@
     currentProducts = JSON.stringify(currentProducts)
 
     render()
+    function llenarProductos(){
+      let tabla = document.getElementById("table");
+      let rows = tabla.rows;
+      let columns = rows[0].cells;
+      let p = new Array();
+      for (let i = 1; i < rows.length; i++) {
+        p[i-1]= new Array(columns.length-1);
+        for(let j = 0; j < columns.length-1; j++) {
+          p[i-1][j] = rows[i].cells[j].innerHTML;
+        }
+      }
+      return p;
+    }
+  let productos = llenarProductos();
+  let csrf = $('input[name="csrfmiddlewaretoken"]').val();  
+  let submit = 0;
+
+  $('#confirm').on('click', function(){
+    let pr = llenarProductos();
+    let total = $('input[name="total"]').val(); 
+    submit = 1;
+    $.ajax({
+      type: "POST",
+      url: "{% url 'endventa' %}",
+      beforeSend: function(xhr) {
+        
+        console.log(productos);
+        submit = 1;
+      },
+      data: {'csrfmiddlewaretoken':csrf, 'submit':submit, 'num':productos.length, 'productos': pr, 'total':total}
+    });
+    alert('Compra realizada exitosamente');
+    localStorage.clear(); 
+  });
   </script>  
   <script src="{% static 'js/checkout.js' %}"></script>
 </div>

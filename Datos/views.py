@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Datos.models import Empleado, Producto, Nomina, Proveedor
+from Datos.models import Empleado, Producto, Nomina, Proveedor, Venta, DetalleVenta
 
 # Create your views here.
 
@@ -136,13 +136,28 @@ def actualizarP(request, codigo):
 
 def end_venta(request):
     if checkLG():
-        print(request.POST)
         total = request.POST['total']
-        # tabla = request.POST['codigo']
+        columns = request.POST.get('num',0)
+        submit = int(request.POST.get('submit',0))
+        print(request.POST)
         print(total)
-        sesion = Empleado.objects.get(logged=True)
-        # venta = Venta(Empleado = sesion, Total=total)
-        # venta.save()
+        print(columns)
+        if submit != 0:
+            sesion = Empleado.objects.get(logged=True)
+            venta = Venta(Empleado = sesion, Total=total)
+            venta.save()
+            for i in range(int(columns)):
+                txt = 'productos['+str(i)+'][]'
+                prod = request.POST.getlist(txt)
+                producto = Producto.objects.get(Codigo=prod[0])
+                cantidad = int(prod[3])
+                subtotal = producto.Precio * cantidad
+                producto.Existencia -= cantidad
+                producto.save()
+                detalle = DetalleVenta(Producto=producto, Venta=venta, Cantidad=cantidad, Subtotal=subtotal)
+                print(detalle)
+                detalle.save()
+            return render(request, 'Productos.html')
         return render(request, 'Checkout.html')
     return render(request, 'login.html')
 
