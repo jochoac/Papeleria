@@ -59,7 +59,9 @@ def actprov (request, codigo):
 def checkout (request):
     return render(request, 'Checkout.html')
 
-def consulta (request, categoria=None):
+def consulta (request):
+    categoria = request.POST.get('comboc', 'Productos')
+    print('la categoria es',categoria)
     if checkLG():
         if categoria == 'Productos':
             retorno = Producto.objects.all()
@@ -80,7 +82,7 @@ def consulta (request, categoria=None):
             retorno = Producto.objects.all()
             headers = Producto.getColumns()
         
-        return render(request, 'Consultas.html', {'headers':headers, 'retorno':retorno})
+        return render(request, 'Consultas.html', {'headers':headers, 'retorno':retorno, 'categoria': categoria})
     return render(request,'login.html')  
 
 
