@@ -39,6 +39,7 @@ urlpatterns = [
     path('cart/<str:categoria>',dv.cart, name= 'cart'),
     path('cart/',dv.cart, name= 'cart'),
     path('endventa/',dv.end_venta, name= 'endventa'),
+    path('detalleVenta/<str:codigo>',v.detalleV, name= 'detalleV'),
     #path('base/', v.base),
     path('checkout/', v.checkout),
 ]

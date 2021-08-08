@@ -1,4 +1,4 @@
-from Datos.models import Empleado, Pedido, Producto, Proveedor, Nomina, Venta
+from Datos.models import Empleado, Pedido, Producto, Proveedor, Nomina, Venta, Pedido, DetalleVenta
 from django.shortcuts import render
 from Datos.views import checkLG
   
@@ -59,6 +59,7 @@ def actprov (request, codigo):
 def checkout (request):
     return render(request, 'Checkout.html')
 
+# Funcion para cargar las consultas
 def consulta (request):
     categoria = request.POST.get('comboc', 'Productos')
     print('la categoria es',categoria)
@@ -84,5 +85,13 @@ def consulta (request):
         
         return render(request, 'Consultas.html', {'headers':headers, 'retorno':retorno, 'categoria': categoria})
     return render(request,'login.html')  
+
+def detalleV(request,codigo):
+    if checkLG():
+        venta = Venta.objects.get(id=codigo)
+        detalles = DetalleVenta.objects.filter(Venta=venta)
+        print(detalles)
+        return render(request, 'detalleVenta.html', {'venta': venta, 'detalles': detalles})
+    return render(request, 'login.html')
 
 
