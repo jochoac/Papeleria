@@ -1,15 +1,14 @@
 function sortTable(n,numeric = false, tableName){
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById(tableName);
     switching = true;
-    //Set the sorting direction to ascending:
+    //Poner la dirección del ordenamiento en ascendente: 
     dir = "asc";
-    /*Make a loop that will continue until
-    no switching has been done:*/
+    /*Ciclo que continua hasta que no haya nada mas que ordenar*/
     while (switching) {
         switching = false;
         rows = table.rows;
-        /*Start a loop through all table rows:*/
+        /*Ciclo a través de todas las filas de la tabla:*/
         for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[n];
@@ -54,7 +53,8 @@ function sortTable(n,numeric = false, tableName){
             }
         }
     }
-}
+};
+/* Obtener los datos de los encabezados de las tablas */
 $('th').on('click', function () {
     let column = $(this).data('column');
     let name = $(this).closest('table').attr('id');

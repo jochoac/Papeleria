@@ -27,12 +27,9 @@
     </form>
   </div>
 </div>
-</div class ="row center-xs">
-  
-<div>
-
-</div>
   <script> 
+
+    //Funcion para limpiar el carrito
     function clearCart(){
       alert('La compra ha sido cancelada.')
       localStorage.clear();
@@ -40,6 +37,8 @@
       total.value = "No hay productos en el carrito";
       render()
     }
+
+    //Funcion para disminuir la cantidad de un producto
     function removeProduct(product) {
       let currentProducts = JSON.parse(localStorage.getItem('cartProducts'))
       let newProducts = []
@@ -58,6 +57,7 @@
       render()
     }
 
+    //Funcion para aumentar la cantidad de un producto
     function addProduct(product) {
       let newProducts = JSON.parse(localStorage.getItem('cartProducts'))
       newProducts = newProducts.map(item => {
@@ -70,6 +70,7 @@
       render()
     }
 
+    //Funcion para crear los botones de + y -
     function loadIcons (product) {
       const row = document.createElement('div')
       row.className = 'row'
@@ -95,6 +96,7 @@
       return row
     }
 
+    //Funcion para crear una TableRow
     function makeElem(product) {
 
         const tr = document.createElement('tr')
@@ -120,6 +122,7 @@
         return tr
     }
 
+    //Funcion para los encabezados de la tabla
     function renderHeader() {
       const thead = document.createElement('thead')
 
@@ -146,6 +149,7 @@
       return thead
     }
 
+    //Funcion para añadir los productos
     function renderProducts() {
       const currentList = document.getElementById('product-table')
       if (currentList) currentList.remove()
@@ -166,6 +170,7 @@
       return listContainer
     }
 
+    //Funcion para añadir el total
     function renderTotal() {
       const currentList = document.getElementById('total')
       if (currentList) currentList.remove()
@@ -186,7 +191,6 @@
 
       return total
     }
-    
 
     // render screen
     function render() {

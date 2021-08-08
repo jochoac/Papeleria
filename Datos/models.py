@@ -1,5 +1,8 @@
 from django.db import models
 
+# ORM: Object Relational Mapping
+#Aquí se crean las tablas y sus respectivas relaciones (Base de datos)
+
 # Create your models here.
 #Table Producto
 class Producto(models.Model):
@@ -8,9 +11,12 @@ class Producto(models.Model):
     Referencia = models.CharField(max_length=50)
     Categoria = models.CharField(max_length=50)
     Precio = models.DecimalField(max_digits=10, decimal_places=2)
-    Existencia = models.IntegerField()
+    Existencia = models.IntegerField() 
 
-
+    def getColumns():
+        return ['Codigo','Nombre','Referencia','Categoría','Precio','Existencia']
+    
+    # To String method
     def __str__(self):
         return self.Codigo + '%' + self.Nombre + '%' + self.Referencia + '%' + self.Categoria + '%' + str(self.Precio) + '%' + str(self.Existencia)
 
@@ -24,12 +30,18 @@ class Empleado(models.Model):
     Password = models.CharField(max_length=100, default='1234')
     logged = models.BooleanField(default=False)
 
+    def getColumns():
+        return ['No. Identificación', 'Nombre', 'Apellido', 'Cargo', 'Estado']
+
 
 # Table Proveedor
 class Proveedor(models.Model):
     NIT = models.CharField(primary_key=True, max_length=20)
     Nombre = models.CharField(max_length=100)
     Telefono = models.IntegerField()
+
+    def getColumns():
+        return ['NIT', 'Nombre', 'Telefono']
 
 # Table Pedido
 class Pedido(models.Model):
@@ -40,6 +52,9 @@ class Pedido(models.Model):
     Hora = models.TimeField(auto_now_add=True)
     Total = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def getColumns():
+        return ['No. Pedido', 'Empleado', 'Proveedor', 'Fecha', 'Hora', 'Total']
+
 # Table Venta
 class Venta(models.Model):
     id = models.AutoField(primary_key=True)
@@ -47,12 +62,16 @@ class Venta(models.Model):
     Fecha = models.DateTimeField(auto_now_add=True)
     Total = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def getColumns():
+        return ['No. Venta', 'Empleado', 'Fecha', 'Total']
+
 # Table DetallePedido
 class DetallePedido(models.Model):
     Producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     Pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     Subtotal = models.DecimalField(max_digits=10, decimal_places=2)
     Cantidad = models.IntegerField()
+
 
 # Table DetalleVenta
 class DetalleVenta(models.Model):

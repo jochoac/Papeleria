@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- cargar archivo css principal -->
     <link rel="stylesheet" href='{% static "css/StylesProductos.css" %}'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
     <div class="row main-container center-xs">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="body card animated flipInX">
-                <header >
+                <header>
                     <nav class="Navegacion">
                         <ul class="Menu">
                             <li><a href="{% url 'productos' %}">Productos</a>
@@ -41,7 +42,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'consultas' %}">Consultas y Reportes</a></li>
+                            <li><a href="/consulta/Productos">Consultas y Reportes</a></li>
                             <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                         </ul>
                     </nav>
