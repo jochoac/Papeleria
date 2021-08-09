@@ -155,7 +155,6 @@ def end_venta(request):
                 producto.Existencia -= cantidad
                 producto.save()
                 detalle = DetalleVenta(Producto=producto, Venta=venta, Cantidad=cantidad, Subtotal=subtotal)
-                print(detalle)
                 detalle.save()
             return render(request, 'Productos.html')
         return render(request, 'Checkout.html')

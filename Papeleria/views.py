@@ -20,7 +20,9 @@ def consultas(request):
 # Funcion para ir a la página de recibir pedidos
 def recibped(request):
     if checkLG():
-        return render(request,'RecibPed.html') 
+        proveedores= Proveedor.objects.all()
+        productos= Producto.objects.all()
+        return render(request,'RecibPed.html',{'proveedores':proveedores, 'productos':productos}) 
     return render(request, 'login.html')
 
 # Funcion para ir al formulario de actualizar productos
@@ -62,7 +64,6 @@ def checkout (request):
 # Funcion para cargar las consultas
 def consulta (request):
     categoria = request.POST.get('comboc', 'Productos')
-    print('la categoria es',categoria)
     if checkLG():
         if categoria == 'Productos':
             retorno = Producto.objects.all()

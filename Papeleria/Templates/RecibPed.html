@@ -10,43 +10,129 @@
 <header style="text-align: center;">
     <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Pedido Recien Llegado</h2>
 </header>
-<div class ="row center-xs" >
-    <div class="card col-md-4 col-sm-4 col-xs-10 items">
-        <br>
-        <input class="textbox" type="number"required placeholder="Codigo del prodcuto"> 
-        <input class="textbox" type="text" required placeholder="Nombre del Producto">
-        <input class="textbox" type="text" required placeholder="Referencia del Producto">
-        <input class="textbox" type="number" required placeholder="Cantidad">
-        <input class="btn" type="button" value="Registrar">
-    </div>
-    <div class="card col-md-6 col-sm-6 col-xs-10  ">
-        <table class="default">
-            <caption>Inventario</caption>
+<div class="row center-xs" >
+    <div class="card col-md-10 col-sm-10 col-xs-10  ">
+        <label id="lbltotal"for="Total">Seleccione un proveedor: </label>
+        <select name="proveedor" class = "combo">
+            {% for item in proveedores %}
+            <option value="{{item.NIT}}">{{item.Nombre}}</option>
+            {% endfor %}
+        </select>
+
+        <table id="tableProductos">
+            <br>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Busca un producto...">
+            <br>
+            <br>
+            <thead>
+                <tr>
+                    <th data-numeric = "0" data-column= "0" data-order="desc">Código &#9660</th>
+                    <th data-numeric = "0" data-column= "1" data-order="desc">Nombre Producto &#9660</th>
+                    <th data-numeric = "0" data-column= "2" data-order="desc">Referencia &#9660</th>
+                    <th data-numeric = "1" data-column= "3" data-order="desc">Cantidad &#9660</th>
+                    <th data-numeric = "0" data-column= "4" data-order="desc">Categoría &#9660</th>
+                    <th data-numeric = "1" data-column= "5" data-order="desc">Precio &#9660</th>
+                    <th>Añadir</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for producto in productos %}
             <tr>
-                <th>Código Producto</th>
-                <th>Nombre Producto</th>
-                <th>Referencia</th>
-                <th>Cantidad</th>
-                </tr>
+                <td >{{producto.Codigo}}</td>
+                <td >{{ producto.Nombre }}</td>
+                <td >{{ producto.Referencia }}</td>
+                <td >{{ producto.Existencia }}</td>
+                <td >{{ producto.Categoria }}</td>
+                <td >{{ producto.Precio }}</td>
+                <td><button data-product="{{producto.Codigo}}" data-nombre="{{producto.Nombre}}" data-precio="{{producto.Precio}}" class="btnimg" type="submit">+</button></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <script src="{% static 'js/Sorting.js' %}"></script>
+    </div>
+</div>
+<br>
+<br>
+<div class="row center-xs" >
+    <div class="card col-md-10 col-sm-10 col-xs-10  ">
+        <h2>Productos en el pedido</h2>
+        <table id="tableCart">
+            <thead>
                 <tr>
-                <td>999999999</td>
-                <td>Cuadernos</td>
-                <td>Norma</td>
-                <td>50</td>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
                 </tr>
-                <tr>
-                <td>888888888</td>
-                <td>Colores</td>
-                <td>Prismacolor</td>
-                <td>60</td>
-                </tr>
-                <tr>
-                <td>111111111</td>
-                <td>Carpetas</td>
-                <td>Genéricas</td>
-                <td>100</td>
-                </tr>
+            </thead>
         </table>
     </div>
 </div>
+<script>
+    //Funcion para buscar un producto
+    function myFunction() {
+      // Declarar variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tableProductos");
+      tr = table.getElementsByTagName("tr");
+    
+      // Iterar a travs de las filas de la tabla, y esconder las que no coinciden con el término de búsqueda
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+$('.btnimg').on('click',function(){
+
+    const table = document.getElementById('tableCart');
+    const tr = document.createElement('tr');
+    const thCod = document.createElement('td');
+    const thName = document.createElement('td');
+    const thCant = document.createElement('input');
+    const thPrice = document.createElement('td');
+    const thSub = document.createElement('td');
+    let price = $(this).data('precio');
+
+    thSub.setAttribute('class','subtotal');
+    thCant.setAttribute('class','cant');
+    
+    thCod.innerText = $(this).data('product');
+    thName.innerText = $(this).data('nombre');
+    thCant.value = '1';
+    thPrice.innerText = $(this).data('precio');
+    thSub.innerText = $(this).data('precio');
+
+    
+
+    tr.appendChild(thCod);
+    tr.appendChild(thName);
+    tr.appendChild(thCant);
+    tr.appendChild(thPrice);
+    tr.appendChild(thSub);
+    table.appendChild(tr);
+    $('.cant').keyup(function(){
+        let cant = $(this).val();
+        tr.removeChild(thSub);
+        let subt = cant*price;
+        thSub.innerText = subt+'.00';
+        tr.appendChild(thSub);
+    });
+    
+});
+
+
+
+
+</script>
 {% endblock %}

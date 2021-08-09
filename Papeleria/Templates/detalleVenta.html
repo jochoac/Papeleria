@@ -5,6 +5,9 @@
 {% block title %}Detalle{% endblock %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" href='{% static "css/detalleventa.css" %}'>
+</head>
 <header style="text-align: center;">
     <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Detalle de Venta</h2>
 </header>
@@ -12,11 +15,11 @@
     <div class="card col-md-10 col-sm-10 col-xs-10">
         <br>
         <br>
-        <label for="Fecha">Fecha: </label>
+        <label class="label" for="Fecha">Fecha: </label>
         <input type="text" class="form-control" id="Fecha" value="{{venta.Fecha}}" readonly>
-        <label for="Empleado">Empleado: </label>
+        <label class= "label" for="Empleado">Empleado: </label>
         <input type="text" class="form-control" id="Empleado" value="{{venta.Empleado.Nombre}} {{venta.Empleado.Apellido}}" readonly>
-        <label for="Total">Total: </label>
+        <label class= "label" for="Total">Total: </label>
         <input type="text" class="form-control" id="Total" value="{{venta.Total}}" readonly>
 
         <br>

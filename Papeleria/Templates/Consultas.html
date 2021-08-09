@@ -21,7 +21,8 @@
             <option>Ventas</option>
             <option>Pedidos</option>
           </select>
-          <input name = "enviar" class="btn" type="submit" value="Buscar">
+          <button name = "enviar" class="btnimg" type="submit"> <img class="nano" src="{% static 'images/find.png' %}" alt="">
+          </button>
         </form>
        <br>
        <br>
@@ -80,7 +81,7 @@
             <br>
             <br>
             <br>
-            <button id="xlsbutton" class="btnimg" type="submit"><img src="{% static 'images/Excelicon.png' %}" alt="x" /></button>                            <br>
+            <button id="xlsbutton" class="btnimg" type="submit"><img class = "img"src="{% static 'images/Excelicon.png' %}" alt="x" /></button>                            <br>
             <br>
             <br>
         </div>  
@@ -90,7 +91,7 @@
   $('#xlsbutton').on('click', function(e) {
     let table = document.getElementById('tablaC');
     let rows = new Array();
-
+    //[[nombre,cantidad, precio],[producto 1, 12, 2000],[producto2, 54,600],[],[],[],[],[]]
     for (let i = 0; i < table.rows.length; i++) {
       rows[i]= new Array();
       for (let j = 0; j < table.rows[i].cells.length; j++) {

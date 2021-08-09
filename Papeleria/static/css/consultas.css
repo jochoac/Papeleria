@@ -1,4 +1,4 @@
-img
+.img
 {   width: 50px;
 }
 
@@ -7,8 +7,17 @@ img
     border-radius: 50%;
     height: fit-content;
     width:fit-content;
-    background: #5BA4B3; 
+    background: #5BA4B3;    
     border:none;
+    cursor:pointer;
+}
+
+.btnimg:hover{
+    background: #44808b;  
+}
+
+.nano{
+    width: 25px;
 }
 
 select{
@@ -28,3 +37,18 @@ caption{
     padding-bottom: 10px;
     padding-top: 10px;
 } 
+
+.editbtn .btn{
+    background-color: #5BA4B3;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.editbtn .btn:hover{
+    background: #44808b; 
+}
