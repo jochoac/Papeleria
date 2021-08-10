@@ -24,6 +24,7 @@ urlpatterns = [
     path('login/',dv.loginP , name= 'login'),
     path('logout/',dv.logoutP, name= 'logout'),
     path('productos/', v.productos, name= 'productos'),
+    path('', v.productos, name= 'productos'),
     path('consulta/', v.consulta, name= 'consulta'),
     path('gesnom/', dv.gesnom, name= 'gesnom'),
     path('gesnom/<str:codigo>', dv.actualizarN, name= 'actualizarN'),
@@ -39,7 +40,9 @@ urlpatterns = [
     path('cart/<str:categoria>',dv.cart, name= 'cart'),
     path('cart/',dv.cart, name= 'cart'),
     path('endventa/',dv.end_venta, name= 'endventa'),
+    path('endcompra/',dv.end_compra, name= 'endcompra'),
     path('detalleVenta/<str:codigo>',v.detalleV, name= 'detalleV'),
+    path('detallepedido/<str:codigo>',v.detalleP, name= 'detalleP'),
     #path('base/', v.base),
     path('checkout/', v.checkout),
 ]

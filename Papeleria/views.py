@@ -1,4 +1,4 @@
-from Datos.models import Empleado, Pedido, Producto, Proveedor, Nomina, Venta, Pedido, DetalleVenta
+from Datos.models import DetallePedido, Empleado, Pedido, Producto, Proveedor, Nomina, Venta, Pedido, DetalleVenta
 from django.shortcuts import render
 from Datos.views import checkLG
   
@@ -87,6 +87,7 @@ def consulta (request):
         return render(request, 'Consultas.html', {'headers':headers, 'retorno':retorno, 'categoria': categoria})
     return render(request,'login.html')  
 
+# Funcion para ir a la pagina de Detalle Ventas
 def detalleV(request,codigo):
     if checkLG():
         venta = Venta.objects.get(id=codigo)
@@ -94,5 +95,15 @@ def detalleV(request,codigo):
         print(detalles)
         return render(request, 'detalleVenta.html', {'venta': venta, 'detalles': detalles})
     return render(request, 'login.html')
+
+# Funcion para ir a la pagina de Detalle Pedido
+def detalleP(request,codigo):
+    if checkLG():
+        pedido = Pedido.objects.get(id=codigo)
+        detalles = DetallePedido.objects.filter(Pedido=pedido)
+        print(detalles)
+        return render(request, 'detallepedido.html', {'pedido': pedido, 'detalles': detalles})
+    return render(request, 'login.html')
+
 
 

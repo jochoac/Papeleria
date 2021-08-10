@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from Datos.models import Empleado, Producto, Nomina, Proveedor, Venta, DetalleVenta
-
+from Datos.models import Empleado, Pedido, Producto, Nomina, Proveedor, Venta, DetalleVenta, DetallePedido
 # Create your views here.
 
 # Función para verificar si hay algun usuario con sesión activa 
@@ -159,6 +158,36 @@ def end_venta(request):
             return render(request, 'Productos.html')
         return render(request, 'Checkout.html')
     return render(request, 'login.html')
+
+def end_compra(request):
+    if checkLG():
+        total = request.POST['total']
+        columns = request.POST.get('num',0)
+        submit = int(request.POST.get('submit',0))
+        print(request.POST)
+        print(total)
+        print(columns)
+        if submit != 0:
+            sesion = Empleado.objects.get(logged=True)
+            proveedor = Proveedor.objects.get(NIT=request.POST.get('proveedor',0))
+            pedido = Pedido(Empleado = sesion, Total=total,Proveedor=proveedor)
+            pedido.save()
+            for i in range(int(columns)):
+                txt = 'productos['+str(i)+'][]'
+                prod = request.POST.getlist(txt)
+                print(prod)
+                producto = Producto.objects.get(Codigo=prod[0])
+                cantidad = float(prod[3])//float(prod[2])
+                print('cantidad:',cantidad)
+                subtotal = int(producto.Precio) * int(cantidad)
+                producto.Existencia += cantidad
+                producto.save()
+                detalle = DetallePedido(Producto=producto, Pedido=pedido, Cantidad=cantidad, Subtotal=subtotal)
+                detalle.save()
+            return render(request, 'Productos.html')
+        return render(request, 'Checkout.html')
+    return render(request, 'login.html')
+
 
 
 # Función para actualizar nómina

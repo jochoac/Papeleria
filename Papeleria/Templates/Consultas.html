@@ -71,7 +71,7 @@
                   <td>{{item.Fecha}}</td>
                   <td>{{item.Hora}}</td>
                   <td>{{item.Total}}</td>
-                  <td class="editbtn"><a class="btn" href="#">Ver más</a></td>
+                  <td class="editbtn"><a class="btn" href="{% url 'detalleP' item.id %}">Ver más</a></td>
                 {% endif %}
               </tr>
               {% endfor %}

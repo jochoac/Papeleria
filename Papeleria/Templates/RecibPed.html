@@ -6,6 +6,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/RecibPed.css' %}">
+<link rel="stylesheet" href="{% static 'css/recibirpedido.css' %}">
 
 <header style="text-align: center;">
     <h2 class=" subtitle" style=" padding-top: 10px; color:#205459" >Registrar Pedido Recien Llegado</h2>
@@ -55,9 +56,9 @@
 <br>
 <br>
 <div class="row center-xs" >
-    <div class="card col-md-10 col-sm-10 col-xs-10  ">
+    <div class="card col-md-7 col-sm-7 col-xs-10  ">
         <h2>Productos en el pedido</h2>
-        <table id="tableCart">
+        <table id="tableCart"  >
             <thead>
                 <tr>
                     <th>Codigo</th>
@@ -68,6 +69,19 @@
                 </tr>
             </thead>
         </table>
+    </div>
+    <div class="card col-md-3 col-sm-3 col-xs-10  ">
+        <h2>Resumen</h2>
+        {% csrf_token %}
+        <label id="lbltotal"for="Total">Total:</label>
+        <input name="total" type="text" id="totaltxt" readonly>
+        <br>
+        <br>
+        <a href="/productos/"><button class="endbtn" id="confirm">Confirmar pedido</button></a>
+        <br>
+        <a href="#"><button onclick="clearCart()" class="endbtn" id="cancel">Cancelar pedido</button></a>
+        <br>
+        <br>
     </div>
 </div>
 <script>
@@ -93,6 +107,17 @@
         }
       }
     }
+
+function updateTotal(){
+    let table = document.getElementById('tableCart');
+    let total = 0;
+    for(let i = 1; i < table.rows.length;i++){
+        total += parseInt(table.rows[i].cells[3].innerHTML);
+    }
+    const txtt = document.getElementById('totaltxt');
+    txtt.value = total;
+}
+//add item to cart
 $('.btnimg').on('click',function(){
 
     const table = document.getElementById('tableCart');
@@ -104,16 +129,21 @@ $('.btnimg').on('click',function(){
     const thSub = document.createElement('td');
     let price = $(this).data('precio');
 
-    thSub.setAttribute('class','subtotal');
+    thSub.setAttribute('id','subtotal');
     thCant.setAttribute('class','cant');
+    thCant.addEventListener('keyup',function(){
+        let cant = $(this).val();
+        let tPrice = $(this).next().html();
+        const subt = cant*tPrice;
+        $(this).next().next().html(subt+'.00');
+        updateTotal();
+    })
     
     thCod.innerText = $(this).data('product');
     thName.innerText = $(this).data('nombre');
     thCant.value = '1';
     thPrice.innerText = $(this).data('precio');
-    thSub.innerText = $(this).data('precio');
-
-    
+    thSub.innerText = $(this).data('precio');    
 
     tr.appendChild(thCod);
     tr.appendChild(thName);
@@ -121,18 +151,46 @@ $('.btnimg').on('click',function(){
     tr.appendChild(thPrice);
     tr.appendChild(thSub);
     table.appendChild(tr);
-    $('.cant').keyup(function(){
-        let cant = $(this).val();
-        tr.removeChild(thSub);
-        let subt = cant*price;
-        thSub.innerText = subt+'.00';
-        tr.appendChild(thSub);
-    });
-    
+
+    updateTotal();  
 });
 
+function llenarProductos(){
+      let tabla = document.getElementById("tableCart");
+      let rows = tabla.rows;
+      let columns = rows[0].cells;
+      let p = new Array();
+      for (let i = 1; i < rows.length; i++) {
+        p[i-1]= new Array(columns.length-1);
+        for(let j = 0; j < columns.length-1; j++) {
+          p[i-1][j] = rows[i].cells[j].innerHTML;
+        }
+      }
+      return p;
+    }
+  let productos = llenarProductos();
+  let csrf = $('input[name="csrfmiddlewaretoken"]').val();  
+  let submit = 0;
 
-
+  $('#confirm').on('click', function(){
+    let pr = llenarProductos();
+    console.log(pr.length);
+    let total = $('input[name="total"]').val(); 
+    let proveedor = $('select[name="proveedor"]').val(); 
+    submit = 1;
+    $.ajax({
+      type: "POST",
+      url: "{% url 'endcompra' %}",
+      beforeSend: function(xhr) {
+        
+        console.log(productos);
+        submit = 1;
+      },
+      data: {'csrfmiddlewaretoken':csrf, 'submit':submit, 'num':pr.length, 'proveedor':proveedor, 'productos': pr, 'total':total}
+    });
+    alert('Compra realizada exitosamente');
+    localStorage.clear(); 
+  });
 
 </script>
 {% endblock %}
